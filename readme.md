@@ -22,9 +22,9 @@ gulp.src('./src/*.coffee')
     .pipe(coffeelint.reporter())
 ```
 
-## Options `coffeelint(opts, literate)`
+## Options `coffeelint(opt, literate)`
 
-### opts
+### opt
 Type: `String` or `Object`
 Default: `{}`
 
