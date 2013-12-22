@@ -17,7 +17,7 @@ var gulp = require('gulp');
 var coffeelint = require('gulp-coffeelint');
 
 gulp.src('./src/*.coffee')
-	.pipe(coffeelint())
+    .pipe(coffeelint())
     .pipe(coffeelint.reporter())
 ```
 
@@ -60,5 +60,5 @@ Adds the following properties to the file object:
 [depstat-url]: https://david-dm.org/janraasch/gulp-coffeelint
 [depstat-image]: https://david-dm.org/janraasch/gulp-coffeelint.png
 
-[depstat-url]: https://david-dm.org/janraasch/gulp-coffeelint#info=devDependencies
-[depstat-image]: https://david-dm.org/janraasch/gulp-coffeelint/dev-status.png
+[devdepstat-url]: https://david-dm.org/janraasch/gulp-coffeelint#info=devDependencies
+[devdepstat-image]: https://david-dm.org/janraasch/gulp-coffeelint/dev-status.png
