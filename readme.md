@@ -22,6 +22,9 @@ gulp.src('./src/*.coffee')
     .pipe(coffeelint.reporter())
 ```
 
+Example output:
+<img src="screenshot.png" alt="report example" height="123" width="631">
+
 ## Options `coffeelint(opt, literate)`
 
 ### opt
