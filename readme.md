@@ -1,7 +1,7 @@
 # gulp-coffeelint [![Build Status][travis-image]][travis-url] [![NPM version][npm-image]][npm-url]
 [![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
 
-> [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp](https://github.com/wearefractal/gulp).
+> [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp](https://github.com/wearefractal/gulp)
 
 ## Usage
 
@@ -37,16 +37,16 @@ Default: `false`
 Are we dealing with literate CoffeeScript here?
 
 ## Results
-Adds the following properties to the file object:
-```javascript
-    file.coffeelint.success = true; // or false
-    file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
-    file.coffeelint.warningCount = 0; // number of warnings returns by `coffeelint`
-    file.coffeelint.results = []; // `coffeelint` results, see [http://www.coffeelint.org/#api](http://www.coffeelint.org/#api)
-    file.coffeelint.opt = {}; // The options you passed to `coffeelint`
-    file.coffeelint.literate = false; // Again, this is your doing...
-```
 
+Adds the following properties to the `file` object:
+```javascript
+file.coffeelint.success = true; // or false
+file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
+file.coffeelint.warningCount = 0; // number of warnings returns by `coffeelint`
+file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint.org/#api
+file.coffeelint.opt = {}; // The options you passed to `coffeelint`
+file.coffeelint.literate = false; // Again, this is your doing...
+```
 
 ## License
 
