@@ -23,6 +23,7 @@ gulp.src('./src/*.coffee')
 ```
 
 Example output:
+
 <img src="screenshot.png" alt="report example" height="123" width="631">
 
 ## Options `coffeelint(opt, literate)`
