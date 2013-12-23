@@ -2,7 +2,7 @@ fs = require 'fs'
 es = require 'event-stream'
 coffeelint = require 'coffeelint'
 gutil = require 'gulp-util'
-reporter = require 'coffeelint-stylish'
+reporter = require('coffeelint-stylish').reporter
 
 formatOutput = (results, file, opt, literate) ->
     # no error
