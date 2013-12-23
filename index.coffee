@@ -57,7 +57,7 @@ coffeelintPlugin.reporter = ->
         return cb null, file if not file.coffeelint or file.coffeelint.success
 
         # report
-        reporter file.relative, file.coffeelicoffeelint-stylishs
+        reporter file.relative, file.coffeelint.results
 
         return cb null, file
 
