@@ -2,7 +2,7 @@ fs = require 'fs'
 es = require 'event-stream'
 coffeelint = require 'coffeelint'
 gutil = require 'gulp-util'
-reporter = require './stylish'
+reporter = require 'coffeelint-stylish'
 
 formatOutput = (results, file, opt, literate) ->
     # no error
@@ -57,7 +57,7 @@ coffeelintPlugin.reporter = ->
         return cb null, file if not file.coffeelint or file.coffeelint.success
 
         # report
-        reporter file.relative, file.coffeelint.results
+        reporter file.relative, file.coffeelicoffeelint-stylishs
 
         return cb null, file
 

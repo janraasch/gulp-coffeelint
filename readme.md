@@ -19,12 +19,8 @@ var coffeelint = require('gulp-coffeelint');
 
 gulp.src('./src/*.coffee')
     .pipe(coffeelint())
-    .pipe(coffeelint.reporter())
+    .pipe(coffeelint.reporter()) // Using `coffeelint-stylish` reporter https://npmjs.org/package/coffeelint-stylish
 ```
-
-Example output:
-
-<img src="screenshot.png" alt="report example" height="123" width="631">
 
 ## Options `coffeelint(opt, literate)`
 

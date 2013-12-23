@@ -18,19 +18,17 @@
     "url": "http://janraasch.com"
   },
   "files": [
-    "index.js",
-    "stylish.js"
+    "index.js"
   ],
   "scripts": {
     "prepublish": "node ./node_modules/gulp/bin/gulp.js coffee --require coffee-script",
-    "test": "node ./node_modules/mocha/bin/mocha ./test/*.coffee --require coffee-script --reporter nyan && node ./node_modules/coffeelint/bin/coffeelint gulpfile.coffee stylish.coffee index.coffee test -f ./coffeelint.json"
+    "test": "node ./node_modules/mocha/bin/mocha ./test/*.coffee --require coffee-script --reporter nyan && node ./node_modules/coffeelint/bin/coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json"
   },
   "dependencies": {
     "event-stream": "~3.0.20",
     "coffeelint": "~1.0.2",
     "gulp-util": "~2.2.0",
-    "chalk": "~0.4.0",
-    "text-table": "~0.2.0"
+    "coffeelint-stylish": "0.0.1"
   },
   "devDependencies": {
     "mocha": "~1.16.1",
