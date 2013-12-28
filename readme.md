@@ -17,9 +17,11 @@ Then, add it to your `gulpfile.js`:
 var gulp = require('gulp');
 var coffeelint = require('gulp-coffeelint');
 
-gulp.src('./src/*.coffee')
-    .pipe(coffeelint())
-    .pipe(coffeelint.reporter()) // Using `coffeelint-stylish` reporter https://npmjs.org/package/coffeelint-stylish
+gulp.task('lint', function () {
+    gulp.src('./src/*.coffee')
+        .pipe(coffeelint())
+        .pipe(coffeelint.reporter()) // Using `coffeelint-stylish` reporter https://npmjs.org/package/coffeelint-stylish
+});
 ```
 
 ## Options `coffeelint(opt, literate)`
