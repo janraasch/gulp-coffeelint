@@ -26,21 +26,21 @@
   },
   "dependencies": {
     "coffeelint": "~1.0.2",
-    "gulp-util": "~2.2.5",
     "coffeelint-stylish": "0.0.1",
-    "map-stream": "~0.1.0"
+    "gulp-util": "~2.2.5",
+    "through2": "~0.4.0"
   },
   "devDependencies": {
+    "coffee-script": "~1.6.3",
     "mocha": "~1.17.0",
     "should": "~2.1.0",
     "gulp": "~3.3.2",
     "gulp-coffee": "~1.2.2",
-    "coffee-script": "~1.6.3",
-    "sinon": "~1.7.3",
-    "gulp-clean": "~0.2.2"
+    "gulp-clean": "~0.2.2",
+    "sinon": "~1.7.3"
   },
   "engines": {
-    "node": ">=0.9.0"
+    "node": ">=0.10.0"
   },
   "license": "MIT"
 }

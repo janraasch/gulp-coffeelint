@@ -1,5 +1,5 @@
 fs = require 'fs'
-map = require 'map-stream'
+through2 = require 'through2'
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
 stylish = require 'coffeelint-stylish'
@@ -44,11 +44,15 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
         catch e
             throw createPluginError "Could not load config from file: #{e}"
 
-    map (file, cb) ->
+    through2.obj (file, enc, cb) ->
         # pass along
-        return cb null, file if file.isNull()
+        if file.isNull()
+            this.push file
+            return cb()
 
-        return cb createPluginError 'Streaming not supported' if file.isStream()
+        if file.isStream()
+            this.emit 'error', createPluginError 'Streaming not supported'
+            return cb()
 
         # if `opt` is not already a JSON `Object`,
         # get config like `coffeelint` cli does.
@@ -61,7 +65,7 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
         # see http://www.coffeelint.org/#api
         # for format
         results = coffeelint.lint(
-            file.contents.toString('utf8'),
+            file.contents.toString(enc),
             opt,
             literate
         )
@@ -69,18 +73,23 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
         output = formatOutput results, opt, literate
         file.coffeelint = output
 
-        cb null, file
+        this.push file
+        cb()
 
 coffeelintPlugin.reporter = ->
     reporter = stylish.reporter
 
-    map (file, cb) ->
+    through2.obj (file, enc, cb) ->
         # nothing to report or no errors
-        return cb null, file if not file.coffeelint or file.coffeelint.success
+        if not file.coffeelint or file.coffeelint.success
+            this.push file
+            return cb()
 
         # report
         reporter file.relative, file.coffeelint.results
 
-        return cb null, file
+        # pass along
+        this.push file
+        cb()
 
 module.exports = coffeelintPlugin
