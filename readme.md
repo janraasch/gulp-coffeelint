@@ -28,9 +28,9 @@ gulp.task('lint', function () {
 
 ### opt
 Type: `String` or `Object`
-Default: `{}`
+Default: `null`
 
-Options you may wish to send to `coffeelint` (see [http://www.coffeelint.org/#options](http://www.coffeelint.org/#options)) **or** the absolute path of a `.json` file containing such a configuration object.
+By default it will walk up the directory tree looking for a `coffeelint.json` (per file, i.e. dirname) or a `package.json` that has a `coffeelintConfig` object ([as the cli does](http://www.coffeelint.org/#usage)). You may also pass in options you wish to send to `coffeelint` (see [http://www.coffeelint.org/#options](http://www.coffeelint.org/#options)) directly **or** you may enter the **absolute path** of a `.json` file containing such a configuration object.
 
 ### literate
 Type: `Boolean`

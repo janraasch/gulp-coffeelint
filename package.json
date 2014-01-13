@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "prepublish": "node ./node_modules/gulp/bin/gulp.js coffee --require coffee-script",
-    "test": "node ./node_modules/mocha/bin/mocha ./test/*.coffee --require coffee-script --reporter nyan && node ./node_modules/coffeelint/bin/coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json"
+    "test": "node ./node_modules/mocha/bin/mocha ./test/*.coffee --require coffee-script --reporter spec && node ./node_modules/coffeelint/bin/coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json"
   },
   "dependencies": {
     "event-stream": "~3.0.20",
