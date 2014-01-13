@@ -3,6 +3,9 @@ should = require 'should'
 gutil = require 'gulp-util'
 path = require 'path'
 
+# fixtures
+customRule = require './fixtures/irule'
+
 # SUT
 coffeelint = require '../'
 
@@ -192,6 +195,43 @@ describe 'gulp-coffeelint', ->
                     'max_line_length'
                 )
                 should.exist newFile.coffeelint.results[0].context
+
+            stream.once 'end', ->
+                dataCounter.should.equal 1
+                done()
+
+            stream.write fakeFile
+            stream.end()
+
+        it 'should load custom rule', (done) ->
+            dataCounter = 0
+
+            fakeFile = new gutil.File
+                path: './test/fixture/file.js',
+                cwd: './test/',
+                base: './test/fixture/',
+                contents: new Buffer 'console.log "gulp is awesome"'
+
+            stream = coffeelint({}, false, [customRule])
+
+            stream.on 'data', (newFile) ->
+                ++dataCounter
+                should.exist newFile.coffeelint
+                should.exist newFile.coffeelint.opt
+                newFile.coffeelint.opt.should.be.empty
+                newFile.coffeelint.success.should.be.false
+                newFile.coffeelint.errorCount.should.equal 1
+                newFile.coffeelint.warningCount.should.equal 0
+                newFile.coffeelint.results.should.be.an.instanceOf Array
+                newFile.coffeelint.results.should.not.be.empty
+                # see http://www.coffeelint.org/#api
+                newFile.coffeelint.results[0].lineNumber.should.equal 1
+                should.exist newFile.coffeelint.results[0].message
+                should.exist newFile.coffeelint.results[0].description
+                should.exist newFile.coffeelint.results[0].rule
+                newFile.coffeelint.results[0].rule.should.equal(
+                    'awesome_custom_rule'
+                )
 
             stream.once 'end', ->
                 dataCounter.should.equal 1

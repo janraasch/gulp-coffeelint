@@ -24,7 +24,7 @@ gulp.task('lint', function () {
 });
 ```
 
-## Options `coffeelint(opt, literate)`
+## Options `coffeelint(opt, literate, rules)`
 
 ### opt
 Type: `String` or `Object`
@@ -37,6 +37,12 @@ Type: `Boolean`
 Default: `false`
 
 Are we dealing with literate CoffeeScript here?
+
+### rules
+Type: `Array[Function]`
+Default: `[]`
+
+Add [custom rules](http://www.coffeelint.org/#api) to `coffeelint`.
 
 ## Results
 
