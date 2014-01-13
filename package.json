@@ -25,10 +25,10 @@
     "test": "node ./node_modules/mocha/bin/mocha ./test/*.coffee --require coffee-script --reporter spec && node ./node_modules/coffeelint/bin/coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json"
   },
   "dependencies": {
-    "event-stream": "~3.1.0",
     "coffeelint": "~1.0.2",
     "gulp-util": "~2.2.5",
-    "coffeelint-stylish": "0.0.1"
+    "coffeelint-stylish": "0.0.1",
+    "map-stream": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.17.0",

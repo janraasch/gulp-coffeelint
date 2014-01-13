@@ -1,5 +1,5 @@
 fs = require 'fs'
-es = require 'event-stream'
+map = require 'map-stream'
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
 reporter = require('coffeelint-stylish').reporter
@@ -33,7 +33,7 @@ coffeelintPlugin = (opt = null, literate = false) ->
         catch e
             throw new PluginError 'gulp-coffeelint', "Could not load config from file: #{e}"
 
-    es.map (file, cb) ->
+    map (file, cb) ->
         # pass along
         return cb null, file if file.isNull()
 
@@ -59,7 +59,7 @@ coffeelintPlugin = (opt = null, literate = false) ->
         cb null, file
 
 coffeelintPlugin.reporter = ->
-    es.map (file, cb) ->
+    map (file, cb) ->
         # nothing to report or no errors
         return cb null, file if not file.coffeelint or file.coffeelint.success
 
