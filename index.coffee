@@ -2,8 +2,9 @@ fs = require 'fs'
 es = require 'event-stream'
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
-gutil = require 'gulp-util'
 reporter = require('coffeelint-stylish').reporter
+PluginError = (require 'gulp-util').PluginError
+
 
 formatOutput = (results, file, opt, literate) ->
     errs = 0
@@ -27,13 +28,17 @@ formatOutput = (results, file, opt, literate) ->
 coffeelintPlugin = (opt = null, literate = false) ->
     # if `opt` is a string, we load the config (for all files) directly.
     if typeof opt is 'string'
-        gutil.log "Loading '#{gutil.colors.cyan 'coffeelint'}' config from #{gutil.colors.magenta opt}"
         try
             opt = JSON.parse fs.readFileSync(opt).toString()
         catch e
-            throw new Error "gulp-coffeelint: Could not load config from file #{filename}: #{e}"
+            throw new PluginError 'gulp-coffeelint', "Could not load config from file: #{e}"
 
     es.map (file, cb) ->
+        # pass along
+        return cb null, file if file.isNull()
+
+        return cb new PluginError 'gulp-coffeelint', 'Streaming not supported' if file.isStream()
+
         # if `opt` is not already a JSON `Object`,
         # get config like `coffeelint` cli does.
         opt = configfinder.getConfig file.path if !opt
@@ -43,9 +48,9 @@ coffeelintPlugin = (opt = null, literate = false) ->
         # send results `Array` downstream
         # see http://www.coffeelint.org/#api
         try
-            results = coffeelint.lint String(file.contents), opt, literate
+            results = coffeelint.lint file.contents.toString('utf8'), opt, literate
         catch e
-            newError = new Error("gulp-coffeelint: Could not lint #{file.path}: #{e}")
+            newError = new PluginError 'gulp-coffeelint', "Could not lint #{file.path}: #{e}"
             return cb newError
 
         output = formatOutput results, file, opt, literate
