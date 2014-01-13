@@ -2,11 +2,11 @@ fs = require 'fs'
 map = require 'map-stream'
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
-reporter = require('coffeelint-stylish').reporter
+stylish = require 'coffeelint-stylish'
 PluginError = (require 'gulp-util').PluginError
 
 
-formatOutput = (results, file, opt, literate) ->
+formatOutput = (results, opt, literate) ->
     errs = 0
     warns = 0
 
@@ -53,12 +53,14 @@ coffeelintPlugin = (opt = null, literate = false) ->
             newError = new PluginError 'gulp-coffeelint', "Could not lint #{file.path}: #{e}"
             return cb newError
 
-        output = formatOutput results, file, opt, literate
+        output = formatOutput results, opt, literate
         file.coffeelint = output
 
         cb null, file
 
 coffeelintPlugin.reporter = ->
+    reporter = stylish.reporter
+
     map (file, cb) ->
         # nothing to report or no errors
         return cb null, file if not file.coffeelint or file.coffeelint.success
