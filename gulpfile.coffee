@@ -9,15 +9,22 @@ gulp.task 'coffee', ->
         .pipe(gulp.dest './')
 
 # run tests
-gulp.task 'test', ->
+gulp.task 'test', ['coffee'], ->
     spawn 'npm', ['test'], stdio: 'inherit'
+
+# run `gulp-coffeelint` for testing purposes
+gulp.task 'coffeelint', ->
+    coffeelint = require './index.coffee'
+    gulp.src('./*.coffee')
+        .pipe(coffeelint(''))
+        .pipe(coffeelint.reporter())
 
 # workflow
 gulp.task 'default', ->
     gulp.run 'coffee'
 
     gulp.watch ['./*.coffee', '!./gulpfile.coffee'], ->
-        gulp.run 'coffee', 'test'
+        gulp.run 'test'
 
     gulp.watch ['./test/*'], ->
         gulp.run 'test'
