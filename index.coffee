@@ -5,6 +5,9 @@ configfinder = require 'coffeelint/lib/configfinder'
 stylish = require 'coffeelint-stylish'
 PluginError = (require 'gulp-util').PluginError
 
+createPluginError = (message) ->
+    new PluginError 'gulp-coffeelint', message
+
 
 formatOutput = (results, opt, literate) ->
     errs = 0
@@ -25,19 +28,27 @@ formatOutput = (results, opt, literate) ->
     literate: literate
 
 
-coffeelintPlugin = (opt = null, literate = false) ->
+coffeelintPlugin = (opt = null, literate = false, rules = []) ->
+    # register custom rules
+    rules.map (rule) ->
+        if typeof rule isnt 'function'
+            throw createPluginError(
+                "Custom rules need to be of type function, not #{typeof rule}"
+            )
+        coffeelint.registerRule rule
+
     # if `opt` is a string, we load the config (for all files) directly.
     if typeof opt is 'string'
         try
             opt = JSON.parse fs.readFileSync(opt).toString()
         catch e
-            throw new PluginError 'gulp-coffeelint', "Could not load config from file: #{e}"
+            throw createPluginError "Could not load config from file: #{e}"
 
     map (file, cb) ->
         # pass along
         return cb null, file if file.isNull()
 
-        return cb new PluginError 'gulp-coffeelint', 'Streaming not supported' if file.isStream()
+        return cb createPluginError 'Streaming not supported' if file.isStream()
 
         # if `opt` is not already a JSON `Object`,
         # get config like `coffeelint` cli does.
@@ -48,9 +59,13 @@ coffeelintPlugin = (opt = null, literate = false) ->
         # send results `Array` downstream
         # see http://www.coffeelint.org/#api
         try
-            results = coffeelint.lint file.contents.toString('utf8'), opt, literate
+            results = coffeelint.lint(
+                file.contents.toString('utf8'),
+                opt,
+                literate
+            )
         catch e
-            newError = new PluginError 'gulp-coffeelint', "Could not lint #{file.path}: #{e}"
+            newError = createPluginError "Could not lint #{file.path}: #{e}"
             return cb newError
 
         output = formatOutput results, opt, literate

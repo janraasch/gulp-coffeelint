@@ -51,7 +51,7 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-        it 'should only call the reporter when file.coffeelint.success is false', (done) ->
+        it 'only calls reporter if file.coffeelint.success=false', (done) ->
             dataCounter = 0
 
             fakeFile = new gutil.File

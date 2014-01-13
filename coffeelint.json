@@ -2,9 +2,6 @@
     "indentation": {
         "value": 4
     },
-    "max_line_length": {
-        "value": "120"
-    },
     "line_endings": {
         "level": "error",
         "value": "unix"

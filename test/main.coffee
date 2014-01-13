@@ -124,7 +124,7 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-        it 'should load explicitly set coffeelint config and send bad results', (done) ->
+        it 'should load explicitly set config and send results', (done) ->
             dataCounter = 0
 
             fakeFile = new gutil.File
@@ -150,7 +150,9 @@ describe 'gulp-coffeelint', ->
                 should.exist newFile.coffeelint.results[0].message
                 should.exist newFile.coffeelint.results[0].description
                 should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal 'max_line_length'
+                newFile.coffeelint.results[0].rule.should.equal(
+                    'max_line_length'
+                )
                 should.exist newFile.coffeelint.results[0].context
 
             stream.once 'end', ->
@@ -160,7 +162,7 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-        it 'should load implicitly set coffeelint config as the coffeelint cli does and send bad results', (done) ->
+        it 'should load config as cli does and send results', (done) ->
             dataCounter = 0
 
             fakeFile = new gutil.File
@@ -186,7 +188,9 @@ describe 'gulp-coffeelint', ->
                 should.exist newFile.coffeelint.results[0].message
                 should.exist newFile.coffeelint.results[0].description
                 should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal 'max_line_length'
+                newFile.coffeelint.results[0].rule.should.equal(
+                    'max_line_length'
+                )
                 should.exist newFile.coffeelint.results[0].context
 
             stream.once 'end', ->
