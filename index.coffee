@@ -56,17 +56,15 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
 
         results = null
         output = null
-        # send results `Array` downstream
+
+        # get results `Array`
         # see http://www.coffeelint.org/#api
-        try
-            results = coffeelint.lint(
-                file.contents.toString('utf8'),
-                opt,
-                literate
-            )
-        catch e
-            newError = createPluginError "Could not lint #{file.path}: #{e}"
-            return cb newError
+        # for format
+        results = coffeelint.lint(
+            file.contents.toString('utf8'),
+            opt,
+            literate
+        )
 
         output = formatOutput results, opt, literate
         file.coffeelint = output
