@@ -3,6 +3,17 @@ should = require 'should'
 gutil = require 'gulp-util'
 path = require 'path'
 
+# const
+PLUGIN_NAME = 'gulp-coffeelint'
+ERR_MSG =
+    RULE:
+        'Custom rules need to be of type function, not string'
+    CONFIG:
+        "Could not load config from file:
+ Error: ENOENT, no such file or directory ''"
+    STREAM:
+        'Streaming not supported'
+
 # fixtures
 customRule = require './fixtures/irule'
 
@@ -240,3 +251,42 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
+        describe 'errors', ->
+            describe 'are thrown', ->
+                it 'if custom rule is not of type function', (done) ->
+                    try
+                        stream = coffeelint(
+                            {},
+                            false,
+                            ['This ain\'t no function']
+                        )
+                    catch e
+                        should(e.plugin).equal PLUGIN_NAME
+                        should(e.message).equal ERR_MSG.RULE
+                        done()
+
+                it 'if config (passed as String) cannot be loaded', (done) ->
+                    try
+                        stream = coffeelint('')
+                    catch e
+                        should(e.plugin).equal PLUGIN_NAME
+                        should(e.message).equal ERR_MSG.CONFIG
+                        done()
+
+            describe 'are emitted to the stream', ->
+                it 'if file is stream', (done) ->
+                    fakeFile = new gutil.File
+                        path: './test/fixture/file.js',
+                        cwd: './test/',
+                        base: './test/fixture/',
+                        contents: process.stdin
+
+                    stream = coffeelint({})
+
+                    stream.on 'error', (e) ->
+                        should(e.plugin).equal PLUGIN_NAME
+                        should(e.message).equal ERR_MSG.STREAM
+                        done()
+
+                    stream.write fakeFile
+                    stream.end()
