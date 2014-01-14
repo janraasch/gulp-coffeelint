@@ -22,6 +22,33 @@ coffeelint = require '../'
 
 describe 'gulp-coffeelint', ->
     describe 'coffeelint()', ->
+        it 'should pass through empty file', (done) ->
+            dataCounter = 0
+
+            fakeFile = new gutil.File
+                path: './test/fixture/file.js',
+                cwd: './test/',
+                base: './test/fixture/',
+                contents: null
+
+            stream = coffeelint()
+
+            stream.on 'data', (newFile) ->
+                should.exist(newFile)
+                should.exist(newFile.path)
+                should.exist(newFile.relative)
+                should.not.exist(newFile.contents)
+                newFile.path.should.equal './test/fixture/file.js'
+                newFile.relative.should.equal 'file.js'
+                ++dataCounter
+
+            stream.once 'end', ->
+                dataCounter.should.equal 1
+                done()
+
+            stream.write fakeFile
+            stream.end()
+
         it 'should pass through the file', (done) ->
             dataCounter = 0
 
