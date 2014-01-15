@@ -22,7 +22,7 @@ gulp.task 'test', ['coffee'], ->
 # run `gulp-coffeelint` for testing purposes
 gulp.task 'coffeelint', ->
     coffeelint = require './index.coffee'
-    gulp.src('./{,*/,**/}*.coffee')
+    gulp.src('./{,test/,test/fixtures/}*.coffee')
         .pipe(coffeelint())
         .pipe(coffeelint.reporter())
 
