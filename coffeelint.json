@@ -6,6 +6,14 @@
         "level": "error",
         "value": "unix"
     },
+    "colon_assignment_spacing": {
+        "name": "colon_assignment_spacing",
+        "level": "error",
+        "spacing": {
+            "left": 0,
+            "right": 1
+        }
+    },
     "space_operators": {
         "level": "error"
     },
