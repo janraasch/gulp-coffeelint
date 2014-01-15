@@ -300,7 +300,7 @@ describe 'gulp-coffeelint', ->
                         should(e.message).equal ERR_MSG.CONFIG
                         done()
 
-            describe 'are emitted to the stream', ->
+            describe 'are emitted', ->
                 it 'if file is stream', (done) ->
                     fakeFile = new gutil.File
                         path: './test/fixture/file.js',
