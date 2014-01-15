@@ -1,12 +1,19 @@
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
+clean = require 'gulp-clean'
+{log,colors} = require 'gulp-util'
 {spawn} = require 'child_process'
 
-# compile `.coffee`
+# compile `index.coffee`
 gulp.task 'coffee', ->
-    gulp.src(['./*.coffee', '!./gulpfile.coffee'])
+    gulp.src('index.coffee')
         .pipe(coffee bare: true)
         .pipe(gulp.dest './')
+
+# remove `index.js`
+gulp.task 'clean', ->
+    gulp.src('index.js', read: false)
+        .pipe(clean())
 
 # run tests
 gulp.task 'test', ['coffee'], ->
@@ -15,16 +22,14 @@ gulp.task 'test', ['coffee'], ->
 # run `gulp-coffeelint` for testing purposes
 gulp.task 'coffeelint', ->
     coffeelint = require './index.coffee'
-    gulp.src('./*.coffee')
-        .pipe(coffeelint(''))
+    gulp.src('./{,*/,**/}*.coffee')
+        .pipe(coffeelint())
         .pipe(coffeelint.reporter())
 
-# workflow
+# start workflow
 gulp.task 'default', ->
     gulp.run 'coffee'
 
-    gulp.watch ['./*.coffee', '!./gulpfile.coffee'], ->
-        gulp.run 'test'
-
-    gulp.watch ['./test/*'], ->
+    gulp.watch ['./{,test/,test/fixtures/}*{.coffee,.json}'], (e) ->
+        log "File #{e.type} #{colors.magenta e.path}"
         gulp.run 'test'
