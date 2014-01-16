@@ -1,4 +1,4 @@
-# gulp-coffeelint [![Build Status][travis-image]][travis-url] [![NPM version][npm-image]][npm-url]
+# gulp-coffeelint [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url]
 [![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
 
 > [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp](https://github.com/wearefractal/gulp) 3.
@@ -65,6 +65,9 @@ file.coffeelint.literate = false; // Again, this is your doing...
 
 [travis-url]: http://travis-ci.org/janraasch/gulp-coffeelint
 [travis-image]: https://secure.travis-ci.org/janraasch/gulp-coffeelint.png?branch=master
+
+[coveralls-url]: https://coveralls.io/r/janraasch/gulp-coffeelint
+[coveralls-image]: https://coveralls.io/repos/janraasch/gulp-coffeelint/badge.png
 
 [depstat-url]: https://david-dm.org/janraasch/gulp-coffeelint
 [depstat-image]: https://david-dm.org/janraasch/gulp-coffeelint.png

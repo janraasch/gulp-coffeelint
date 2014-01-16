@@ -22,7 +22,8 @@
   ],
   "scripts": {
     "prepublish": "gulp coffee --require coffee-script",
-    "test": "mocha ./test/*.coffee --require coffee-script --reporter spec && coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json"
+    "test": "coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json && istanbul test _mocha --report lcovonly -- ./test/*.coffee --require coffee-script --reporter spec",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "coffeelint": "~1.0.2",
@@ -33,11 +34,13 @@
   "devDependencies": {
     "coffee-script": "~1.6.3",
     "mocha": "~1.17.0",
+    "istanbul": "~0.2.3",
     "should": "~2.1.0",
+    "sinon": "~1.7.3",
+    "coveralls": "~2.6.1",
     "gulp": "~3.3.2",
     "gulp-coffee": "~1.2.2",
-    "gulp-clean": "~0.2.2",
-    "sinon": "~1.7.3"
+    "gulp-clean": "~0.2.2"
   },
   "engines": {
     "node": ">=0.10.0"

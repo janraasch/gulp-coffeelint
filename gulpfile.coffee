@@ -10,9 +10,9 @@ gulp.task 'coffee', ->
         .pipe(coffee bare: true)
         .pipe(gulp.dest './')
 
-# remove `index.js`
+# remove `index.js` and `coverage` dir
 gulp.task 'clean', ->
-    gulp.src('index.js', read: false)
+    gulp.src(['index.js', 'coverage'], read: false)
         .pipe(clean())
 
 # run tests
