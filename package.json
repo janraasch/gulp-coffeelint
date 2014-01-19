@@ -35,10 +35,10 @@
     "coffee-script": "~1.6.3",
     "mocha": "~1.17.0",
     "istanbul": "~0.2.3",
-    "should": "~2.1.0",
+    "should": "~3.0.1",
     "sinon": "~1.7.3",
     "coveralls": "~2.6.1",
-    "gulp": "~3.3.2",
+    "gulp": "~3.4.1",
     "gulp-coffee": "~1.2.2",
     "gulp-clean": "~0.2.2"
   },
