@@ -47,11 +47,11 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
     through2.obj (file, enc, cb) ->
         # pass along
         if file.isNull()
-            this.push file
+            @push file
             return cb()
 
         if file.isStream()
-            this.emit 'error', createPluginError 'Streaming not supported'
+            @emit 'error', createPluginError 'Streaming not supported'
             return cb()
 
         # if `opt` is not already a JSON `Object`,
@@ -73,7 +73,7 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
         output = formatOutput results, opt, literate
         file.coffeelint = output
 
-        this.push file
+        @push file
         cb()
 
 coffeelintPlugin.reporter = ->
@@ -82,14 +82,14 @@ coffeelintPlugin.reporter = ->
     through2.obj (file, enc, cb) ->
         # nothing to report or no errors
         if not file.coffeelint or file.coffeelint.success
-            this.push file
+            @push file
             return cb()
 
         # report
         reporter file.relative, file.coffeelint.results
 
         # pass along
-        this.push file
+        @push file
         cb()
 
 module.exports = coffeelintPlugin
