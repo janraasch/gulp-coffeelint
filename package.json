@@ -38,7 +38,7 @@
     "should": "~3.0.1",
     "sinon": "~1.7.3",
     "coveralls": "~2.6.1",
-    "gulp": "~3.4.1",
+    "gulp": "~3.4.0",
     "gulp-coffee": "~1.2.2",
     "gulp-clean": "~0.2.2"
   },
