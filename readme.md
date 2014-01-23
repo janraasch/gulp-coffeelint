@@ -33,10 +33,12 @@ Default: `null`
 By default it will walk up the directory tree looking for a `coffeelint.json` (per file, i.e. dirname) or a `package.json` that has a `coffeelintConfig` object ([as the cli does](http://www.coffeelint.org/#usage)). You may also pass in options you wish to send to `coffeelint` (see [http://www.coffeelint.org/#options](http://www.coffeelint.org/#options)) directly **or** you may enter the **absolute path** of a `.json` file containing such a configuration object.
 
 ### literate
-Type: `Boolean`
-Default: `false`
+Type: `Boolean` or `'auto'`
+Default: `'auto'`
 
 Are we dealing with literate CoffeeScript here?
+
+`'auto'` means `true` for `.litcoffee` and `.coffee.md` files, `false` for all other files.
 
 ### rules
 Type: `Array[Function]`
@@ -50,10 +52,10 @@ Adds the following properties to the `file` object:
 ```javascript
 file.coffeelint.success = true; // or false
 file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
-file.coffeelint.warningCount = 0; // number of warnings returns by `coffeelint`
+file.coffeelint.warningCount = 0; // number of warnings returned by `coffeelint`
 file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint.org/#api
-file.coffeelint.opt = {}; // The options you passed to `coffeelint`
-file.coffeelint.literate = false; // Again, this is your doing...
+file.coffeelint.opt = {}; // the options you passed to `coffeelint`
+file.coffeelint.literate = 'auto'; // you guessed it
 ```
 
 ## License
