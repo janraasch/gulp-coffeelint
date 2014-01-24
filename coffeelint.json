@@ -28,6 +28,7 @@
         "level": "error"
     },
     "cyclomatic_complexity": {
+        "value": "12",
         "level": "error"
     },
     "empty_constructor_needs_parens": {

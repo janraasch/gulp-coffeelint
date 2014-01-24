@@ -1,6 +1,6 @@
 {
   "name": "gulp-coffeelint",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lint your CoffeeScript using gulp and CoffeeLint",
   "keywords": [
     "gulpplugin",
@@ -29,7 +29,8 @@
     "coffeelint": "~1.0.2",
     "coffeelint-stylish": "0.0.1",
     "gulp-util": "~2.2.5",
-    "through2": "~0.4.0"
+    "through2": "~0.4.0",
+    "args-js": "~0.8.0"
   },
   "devDependencies": {
     "coffee-script": "~1.6.3",

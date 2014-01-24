@@ -115,7 +115,7 @@ describe 'gulp-coffeelint', ->
                 base: './test/fixture/',
                 contents: new Buffer 'yeah()'
 
-            stream = coffeelint({})
+            stream = coffeelint {}
 
             stream.on 'data', (newFile) ->
                 ++dataCounter
@@ -139,7 +139,7 @@ describe 'gulp-coffeelint', ->
                 base: './test/fixture/',
                 contents: new Buffer 'yeah();'
 
-            stream = coffeelint({})
+            stream = coffeelint {}
 
             stream.on 'data', (newFile) ->
                 ++dataCounter
@@ -175,6 +175,47 @@ describe 'gulp-coffeelint', ->
                 contents: new Buffer 'yeah();'
 
             stream = coffeelint path.join __dirname, './coffeelint.json'
+
+            stream.on 'data', (newFile) ->
+                ++dataCounter
+                should.exist newFile.coffeelint
+                should.exist newFile.coffeelint.opt
+                newFile.coffeelint.opt.should.not.be.empty
+                newFile.coffeelint.success.should.be.false
+                newFile.coffeelint.errorCount.should.equal 1
+                newFile.coffeelint.warningCount.should.equal 1
+                newFile.coffeelint.results.should.be.an.instanceOf Array
+                newFile.coffeelint.results.should.not.be.empty
+                # see http://www.coffeelint.org/#api
+                newFile.coffeelint.results[0].lineNumber.should.equal 1
+                should.exist newFile.coffeelint.results[0].message
+                should.exist newFile.coffeelint.results[0].description
+                should.exist newFile.coffeelint.results[0].rule
+                newFile.coffeelint.results[0].rule.should.equal(
+                    'max_line_length'
+                )
+                should.exist newFile.coffeelint.results[0].context
+
+            stream.once 'end', ->
+                dataCounter.should.equal 1
+                done()
+
+            stream.write fakeFile
+            stream.end()
+
+        it 'optFile param should overrule opt param', (done) ->
+            dataCounter = 0
+
+            fakeFile = new gutil.File
+                path: './test/fixture/file.js',
+                cwd: './test/',
+                base: './test/fixture/',
+                contents: new Buffer 'yeah();'
+
+            stream = coffeelint(
+                path.join(__dirname, './coffeelint.json'),
+                max_line_length: 10
+            )
 
             stream.on 'data', (newFile) ->
                 ++dataCounter
@@ -282,11 +323,7 @@ describe 'gulp-coffeelint', ->
             describe 'are thrown', ->
                 it 'if custom rule is not of type function', (done) ->
                     try
-                        stream = coffeelint(
-                            {},
-                            false,
-                            ['This ain\'t no function']
-                        )
+                        stream = coffeelint ['This ain\'t no function']
                     catch e
                         should(e.plugin).equal PLUGIN_NAME
                         should(e.message).equal ERR_MSG.RULE
@@ -294,7 +331,7 @@ describe 'gulp-coffeelint', ->
 
                 it 'if config (passed as String) cannot be loaded', (done) ->
                     try
-                        stream = coffeelint('')
+                        stream = coffeelint ''
                     catch e
                         should(e.plugin).equal PLUGIN_NAME
                         should(e.message).equal ERR_MSG.CONFIG
@@ -308,7 +345,7 @@ describe 'gulp-coffeelint', ->
                         base: './test/fixture/',
                         contents: process.stdin
 
-                    stream = coffeelint({})
+                    stream = coffeelint()
 
                     stream.on 'error', (e) ->
                         should(e.plugin).equal PLUGIN_NAME

@@ -1,13 +1,18 @@
+'use strict'
+
 fs = require 'fs'
 through2 = require 'through2'
+Args = require 'args-js/Args' # main entry missing in `args-js` package
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
 stylish = require 'coffeelint-stylish'
 PluginError = (require 'gulp-util').PluginError
 
+isLiterate = (file) ->
+    /\.(litcoffee|coffee\.md)$/.test file
+
 createPluginError = (message) ->
     new PluginError 'gulp-coffeelint', message
-
 
 formatOutput = (results, opt, literate) ->
     errs = 0
@@ -27,8 +32,26 @@ formatOutput = (results, opt, literate) ->
     opt: opt
     literate: literate
 
+params = [
+    {optFile: Args.STRING | Args.Optional}
+    {opt: Args.OBJECT | Args.Optional}
+    {literate: Args.BOOL | Args.Optional}
+    {rules: Args.ARRAY | Args.Optional, _default: []}
+]
 
-coffeelintPlugin = (opt = null, literate = 'auto', rules = []) ->
+coffeelintPlugin = ->
+    # parse arguments
+    try
+        {opt, optFile, literate, rules} = Args params, arguments
+    catch e
+        throw createPluginError e
+
+    # sadly an `Args.OBJECT` maybe an `Array`
+    # e.g. `coffeelintPlugin [-> myCustomRule]`
+    if Array.isArray opt
+        rules = opt
+        opt = undefined
+
     # register custom rules
     rules.map (rule) ->
         if typeof rule isnt 'function'
@@ -37,14 +60,20 @@ coffeelintPlugin = (opt = null, literate = 'auto', rules = []) ->
             )
         coffeelint.registerRule rule
 
-    # if `opt` is a string, we load the config (for all files) directly.
-    if typeof opt is 'string'
+    if toString.call(optFile) is '[object String]'
         try
-            opt = JSON.parse fs.readFileSync(opt).toString()
+            opt = JSON.parse fs.readFileSync(optFile).toString()
         catch e
             throw createPluginError "Could not load config from file: #{e}"
 
     through2.obj (file, enc, cb) ->
+        # `file` specific options
+        fileOpt = opt
+        fileLiterate = literate
+
+        results = null
+        output = null
+
         # pass along
         if file.isNull()
             @push file
@@ -56,28 +85,23 @@ coffeelintPlugin = (opt = null, literate = 'auto', rules = []) ->
 
         # if `opt` is not already a JSON `Object`,
         # get config like `coffeelint` cli does.
-        opt = configfinder.getConfig file.path if !opt
+        fileOpt = configfinder.getConfig file.path if fileOpt is undefined
 
-        results = null
-        output = null
-
-        if literate is 'auto'
-            currentLiterate = false
-            for ext in ['.litcoffee', '.coffee.md']
-                currentLiterate = true if file.path.slice(-(ext.length)) is ext
-        else
-            currentLiterate = !!literate
+        # if `literate` is not given
+        # check for file extension like
+        # `coffeelint`cli does.
+        fileLiterate = isLiterate(file.path) if fileLiterate is undefined
 
         # get results `Array`
         # see http://www.coffeelint.org/#api
         # for format
         results = coffeelint.lint(
-            file.contents.toString(enc),
-            opt,
-            currentLiterate
+            file.contents.toString(),
+            fileOpt,
+            fileLiterate
         )
 
-        output = formatOutput results, opt, currentLiterate
+        output = formatOutput results, fileOpt, fileLiterate
         file.coffeelint = output
 
         @push file

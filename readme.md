@@ -24,21 +24,25 @@ gulp.task('lint', function () {
 });
 ```
 
-## Options `coffeelint(opt, literate, rules)`
+## API
+
+### `coffeelint([optFile,] [opt,] [literate,] [rules])`
+All arguments are optional. By default `gulp-coffeelint` will walk up the directory tree looking for a `coffeelint.json` (per file, i.e. dirname) or a `package.json` that has a `coffeelintConfig` object ([as the cli does](http://www.coffeelint.org/#usage)). Also, `.litcoffee` and `.coffee.md` files will be treated as Literate CoffeeScript.
+
+### optFile
+Type: `String`
+
+Absolute path of a `json` file containing [options][coffeelint-options] for `coffeelint`.
 
 ### opt
-Type: `String` or `Object`
-Default: `null`
+Type: `Object`
 
-By default it will walk up the directory tree looking for a `coffeelint.json` (per file, i.e. dirname) or a `package.json` that has a `coffeelintConfig` object ([as the cli does](http://www.coffeelint.org/#usage)). You may also pass in options you wish to send to `coffeelint` (see [http://www.coffeelint.org/#options](http://www.coffeelint.org/#options)) directly **or** you may enter the **absolute path** of a `.json` file containing such a configuration object.
+[Options][coffeelint-options] you wish to send to `coffeelint`. If `optFile` is given, this will be ignored.
 
 ### literate
-Type: `Boolean` or `'auto'`
-Default: `'auto'`
+Type: `Boolean`
 
-Are we dealing with literate CoffeeScript here?
-
-`'auto'` means `true` for `.litcoffee` and `.coffee.md` files, `false` for all other files.
+Are we dealing with Literate CoffeeScript?
 
 ### rules
 Type: `Array[Function]`
@@ -54,8 +58,8 @@ file.coffeelint.success = true; // or false
 file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
 file.coffeelint.warningCount = 0; // number of warnings returned by `coffeelint`
 file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint.org/#api
-file.coffeelint.opt = {}; // the options you passed to `coffeelint`
-file.coffeelint.literate = 'auto'; // you guessed it
+file.coffeelint.opt = {}; // the options use by `coffeelint`
+file.coffeelint.literate = false; // you guessed it
 ```
 
 ## Contributing
@@ -66,6 +70,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Jan Raasch](http://janraasch.com)
 
 [gulp]: http://gulpjs.com/
+[coffeelint-options]: http://www.coffeelint.org/#options
 
 [npm-url]: https://npmjs.org/package/gulp-coffeelint
 [npm-image]: https://badge.fury.io/js/gulp-coffeelint.png
