@@ -1,8 +1,9 @@
+fs = require 'fs'
+{spawn} = require 'child_process'
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
 clean = require 'gulp-clean'
 {log,colors} = require 'gulp-util'
-{spawn} = require 'child_process'
 
 # compile `index.coffee`
 gulp.task 'coffee', ->
@@ -33,3 +34,13 @@ gulp.task 'default', ->
     gulp.watch ['./{,test/,test/fixtures/}*{.coffee,.json}'], (e) ->
         log "File #{e.type} #{colors.magenta e.path}"
         gulp.run 'test'
+
+# create changelog
+gulp.task 'changelog', ->
+    changelog = require 'conventional-changelog'
+    changelog({
+        repository: 'https://github.com/janraasch/gulp-coffee'
+        version: require('./package.json').version
+    }, (err, log) ->
+        fs.writeFileSync 'changelog.md', log
+    )

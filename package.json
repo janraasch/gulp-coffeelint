@@ -41,7 +41,8 @@
     "coveralls": "~2.6.1",
     "gulp": "~3.4.0",
     "gulp-coffee": "~1.2.2",
-    "gulp-clean": "~0.2.2"
+    "gulp-clean": "~0.2.2",
+    "conventional-changelog": "0.0.6"
   },
   "engines": {
     "node": ">=0.10.0"
