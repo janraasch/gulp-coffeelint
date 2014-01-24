@@ -28,7 +28,7 @@ formatOutput = (results, opt, literate) ->
     literate: literate
 
 
-coffeelintPlugin = (opt = null, literate = false, rules = []) ->
+coffeelintPlugin = (opt = null, literate = 'auto', rules = []) ->
     # register custom rules
     rules.map (rule) ->
         if typeof rule isnt 'function'
@@ -61,16 +61,23 @@ coffeelintPlugin = (opt = null, literate = false, rules = []) ->
         results = null
         output = null
 
+        if literate is 'auto'
+            currentLiterate = false
+            for ext in ['.litcoffee', '.coffee.md']
+                currentLiterate = true if file.path.slice(-(ext.length)) is ext
+        else
+            currentLiterate = !!literate
+
         # get results `Array`
         # see http://www.coffeelint.org/#api
         # for format
         results = coffeelint.lint(
             file.contents.toString(enc),
             opt,
-            literate
+            currentLiterate
         )
 
-        output = formatOutput results, opt, literate
+        output = formatOutput results, opt, currentLiterate
         file.coffeelint = output
 
         @push file
