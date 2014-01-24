@@ -39,7 +39,7 @@ gulp.task 'default', ->
 gulp.task 'changelog', ->
     changelog = require 'conventional-changelog'
     changelog({
-        repository: 'https://github.com/janraasch/gulp-coffee'
+        repository: 'https://github.com/janraasch/gulp-coffeelint'
         version: require('./package.json').version
     }, (err, log) ->
         fs.writeFileSync 'changelog.md', log

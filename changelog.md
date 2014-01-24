@@ -4,5 +4,5 @@
 
 #### Features
 
-* **api:** simplify api, add `optFile` param and make all params optional ([28b74fbc](https://github.com/janraasch/gulp-coffee/commit/28b74fbc88aaf8cb1949cfd68b263755956dd3cf))
-* **literate:** add default auto-detection for Literate CoffeeScript on `.litcoffee` and `.coffee.md` files ([80d55a73](https://github.com/janraasch/gulp-coffee/commit/80d55a73120b3d054262368c26012ffdf658695d))
+* **api:** simplify api, add `optFile` param and make all params optional ([28b74fbc](https://github.com/janraasch/gulp-coffeelint/commit/28b74fbc88aaf8cb1949cfd68b263755956dd3cf))
+* **literate:** add default auto-detection for Literate CoffeeScript on `.litcoffee` and `.coffee.md` files ([80d55a73](https://github.com/janraasch/gulp-coffeelint/commit/80d55a73120b3d054262368c26012ffdf658695d))
