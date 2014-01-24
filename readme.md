@@ -1,7 +1,7 @@
 # gulp-coffeelint [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url]
 [![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
 
-> [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp](https://github.com/wearefractal/gulp) 3.
+> [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp][gulp] 3.
 
 ## Usage
 
@@ -56,9 +56,14 @@ file.coffeelint.opt = {}; // The options you passed to `coffeelint`
 file.coffeelint.literate = false; // Again, this is your doing...
 ```
 
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [gulp][gulp] and [npm-test](https://npmjs.org/doc/test.html). Plus, make sure to adhere to these [commit message conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Jan Raasch](http://janraasch.com)
+
+[gulp]: http://gulpjs.com/
 
 [npm-url]: https://npmjs.org/package/gulp-coffeelint
 [npm-image]: https://badge.fury.io/js/gulp-coffeelint.png
