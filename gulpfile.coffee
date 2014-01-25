@@ -28,12 +28,8 @@ gulp.task 'coffeelint', ->
         .pipe(coffeelint.reporter())
 
 # start workflow
-gulp.task 'default', ->
-    gulp.run 'coffee'
-
-    gulp.watch ['./{,test/,test/fixtures/}*{.coffee,.json}'], (e) ->
-        log "File #{e.type} #{colors.magenta e.path}"
-        gulp.run 'test'
+gulp.task 'default', ['coffee'], ->
+    gulp.watch ['./{,test/,test/fixtures/}*{.coffee,.json}'], ['test']
 
 # create changelog
 gulp.task 'changelog', ->
