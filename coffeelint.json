@@ -2,6 +2,10 @@
     "indentation": {
         "value": 4
     },
+    "use_strict": {
+        "requireGlobal": true,
+        "module": "coffeelint-use-strict"
+    },
     "line_endings": {
         "level": "error",
         "value": "unix"

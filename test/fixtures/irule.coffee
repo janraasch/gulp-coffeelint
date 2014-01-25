@@ -1,3 +1,4 @@
+'use strict'
 iruleRegex = /gulp is awesome/
 module.exports = class IRule
     rule:

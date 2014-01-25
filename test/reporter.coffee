@@ -1,3 +1,5 @@
+'use strict'
+
 # module dependencies
 gutil = require 'gulp-util'
 should = require 'should'
