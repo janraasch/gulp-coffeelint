@@ -9,14 +9,14 @@ clean = require 'gulp-clean'
 
 # compile `index.coffee`
 gulp.task 'coffee', ->
-    gulp.src('index.coffee')
-        .pipe(coffee bare: true)
-        .pipe(gulp.dest './')
+    gulp.src 'index.coffee'
+        .pipe coffee bare: true
+        .pipe gulp.dest './'
 
 # remove `index.js` and `coverage` dir
 gulp.task 'clean', ->
-    gulp.src(['index.js', 'coverage'], read: false)
-        .pipe(clean())
+    gulp.src ['index.js', 'coverage'], read: false
+        .pipe clean()
 
 # run tests
 gulp.task 'test', ['coffee'], ->
@@ -25,9 +25,9 @@ gulp.task 'test', ['coffee'], ->
 # run `gulp-coffeelint` for testing purposes
 gulp.task 'coffeelint', ->
     coffeelint = require './index.coffee'
-    gulp.src('./{,test/,test/fixtures/}*.coffee')
-        .pipe(coffeelint())
-        .pipe(coffeelint.reporter())
+    gulp.src './{,test/,test/fixtures/}*.coffee'
+        .pipe coffeelint()
+        .pipe coffeelint.reporter()
 
 # start workflow
 gulp.task 'default', ['coffee'], ->
