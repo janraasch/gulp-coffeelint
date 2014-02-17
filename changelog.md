@@ -1,3 +1,8 @@
+<a name="0.2.2"></a>
+### 0.2.2 (2014-02-17)
+
+Use `^` instead of `~` in `package.json`. See [node-semver](https://github.com/isaacs/node-semver).
+
 <a name="0.2.1"></a>
 ### 0.2.1 (2014-02-09)
 
