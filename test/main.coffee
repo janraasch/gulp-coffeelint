@@ -293,7 +293,7 @@ describe 'gulp-coffeelint', ->
                 base: './test/fixture/',
                 contents: new Buffer 'console.log "gulp is awesome"'
 
-            stream = coffeelint({}, false, [customRule])
+            stream = coffeelint({}, [customRule])
 
             stream.on 'data', (newFile) ->
                 ++dataCounter
