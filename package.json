@@ -18,11 +18,13 @@
     "url": "http://janraasch.com"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "lib/reporter.js",
+    "lib/utils.js"
   ],
   "scripts": {
     "prepublish": "gulp coffee --require \"coffee-script/register\"",
-    "test": "coffeelint gulpfile.coffee index.coffee test -f ./coffeelint.json && istanbul test _mocha --report lcovonly -- ./test/*.coffee --require coffee-script/register --reporter spec",
+    "test": "coffeelint gulpfile.coffee index.coffee lib test -f ./coffeelint.json && istanbul test _mocha --report lcovonly -- ./test/*.coffee --require coffee-script/register --reporter spec",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {

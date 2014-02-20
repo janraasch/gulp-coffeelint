@@ -2,35 +2,15 @@
 
 fs = require 'fs'
 through2 = require 'through2'
-Args = require 'args-js/Args' # main entry missing in `args-js` package
+Args = require 'args-js' # main entry missing in `args-js` package
 coffeelint = require 'coffeelint'
 configfinder = require 'coffeelint/lib/configfinder'
-stylish = require 'coffeelint-stylish'
-PluginError = (require 'gulp-util').PluginError
 
-isLiterate = (file) ->
-    /\.(litcoffee|coffee\.md)$/.test file
+# `reporter`
+reporter = require './lib/reporter'
 
-createPluginError = (message) ->
-    new PluginError 'gulp-coffeelint', message
-
-formatOutput = (results, opt, literate) ->
-    errs = 0
-    warns = 0
-
-    # some counting
-    results.map (result) ->
-        {level} = result
-        errs++ if level is 'error'
-        warns++ if level is 'warn'
-
-    # output
-    success: if results.length is 0 then true else false
-    results: results
-    errorCount: errs
-    warningCount: warns
-    opt: opt
-    literate: literate
+# common utils
+{isLiterate, createPluginError, formatOutput} = require './lib/utils'
 
 params = [
     {optFile: Args.STRING | Args.Optional}
@@ -107,20 +87,6 @@ coffeelintPlugin = ->
         @push file
         cb()
 
-coffeelintPlugin.reporter = ->
-    reporter = stylish.reporter
-
-    through2.obj (file, enc, cb) ->
-        # nothing to report or no errors
-        if not file.coffeelint or file.coffeelint.success
-            @push file
-            return cb()
-
-        # report
-        reporter file.relative, file.coffeelint.results
-
-        # pass along
-        @push file
-        cb()
+coffeelintPlugin.reporter = reporter
 
 module.exports = coffeelintPlugin

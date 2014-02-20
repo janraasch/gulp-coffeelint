@@ -7,15 +7,15 @@ coffee = require 'gulp-coffee'
 clean = require 'gulp-clean'
 {log,colors} = require 'gulp-util'
 
-# compile `index.coffee`
+# compile `index.coffee` and `lib/*.coffee` files
 gulp.task 'coffee', ->
-    gulp.src 'index.coffee'
+    gulp.src ['{,lib/}*.coffee', '!gulpfile.coffee']
         .pipe coffee bare: true
         .pipe gulp.dest './'
 
-# remove `index.js` and `coverage` dir
+# remove `index.js`, `lib/*.js` and `coverage` dir
 gulp.task 'clean', ->
-    gulp.src ['index.js', 'coverage'], read: false
+    gulp.src ['index.js', 'lib/*.js', 'coverage'], read: false
         .pipe clean()
 
 # run tests
@@ -25,13 +25,13 @@ gulp.task 'test', ['coffee'], ->
 # run `gulp-coffeelint` for testing purposes
 gulp.task 'coffeelint', ->
     coffeelint = require './index.coffee'
-    gulp.src './{,test/,test/fixtures/}*.coffee'
+    gulp.src './{,lib/,test/,test/fixtures/}*.coffee'
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
 # start workflow
 gulp.task 'default', ['coffee'], ->
-    gulp.watch ['./{,test/,test/fixtures/}*{.coffee,.json}'], ['test']
+    gulp.watch ['./{,lib/,test/,test/fixtures/}*{.coffee,.json}'], ['test']
 
 # create changelog
 gulp.task 'changelog', ->
