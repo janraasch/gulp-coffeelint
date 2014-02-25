@@ -19,8 +19,7 @@
   },
   "files": [
     "index.js",
-    "lib/reporter.js",
-    "lib/utils.js"
+    "lib/*.js"
   ],
   "scripts": {
     "prepublish": "gulp coffee --require \"coffee-script/register\"",
