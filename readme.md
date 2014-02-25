@@ -20,7 +20,7 @@ var coffeelint = require('gulp-coffeelint');
 gulp.task('lint', function () {
     gulp.src('./src/*.coffee')
         .pipe(coffeelint())
-        .pipe(coffeelint.reporter()) // Using `coffeelint-stylish` reporter https://npmjs.org/package/coffeelint-stylish
+        .pipe(coffeelint.reporter())
 });
 ```
 
@@ -61,6 +61,18 @@ file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint
 file.coffeelint.opt = {}; // the options use by `coffeelint`
 file.coffeelint.literate = false; // you guessed it
 ```
+
+## Reporters
+
+### `coffeelint.reporter(name)`
+Assuming you would like to make use of those pretty results we have after piping through `coffeelint()` there a some bundled reporters at your service.
+
+### type
+Type: `String`
+Default: `'default'`
+Possible Values: `'default'`, `'fail'`
+
+The `'default'` reporter uses [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) to output a pretty report, while the `'fail'` reporter causes the stream to emit an `error`, if `file.coffeelint.success === false`.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [gulp][gulp] and [npm-test](https://npmjs.org/doc/test.html). Plus, make sure to adhere to these [commit message conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
