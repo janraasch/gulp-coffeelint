@@ -65,9 +65,9 @@ file.coffeelint.literate = false; // you guessed it
 ## Reporters
 
 ### `coffeelint.reporter(name)`
-Assuming you would like to make use of those pretty results we have after piping through `coffeelint()` there a some bundled reporters at your service.
+Assuming you would like to make use of those pretty results we have after piping through `coffeelint()` there are some bundled reporters at your service.
 
-### type
+### name
 Type: `String`
 Default: `'default'`
 Possible Values: `'default'`, `'fail'`
