@@ -1,3 +1,12 @@
+<a name="0.3.0"></a>
+### 0.3.0 (2014-02-25)
+
+
+#### Features
+
+* **reporter:** add `'fail'` reporter ([34fb6afb](https://github.com/janraasch/gulp-coffeelint/commit/34fb6afbdb41679b0fe5983f1bf89760a0179193))
+
+
 <a name="0.2.2"></a>
 ### 0.2.2 (2014-02-17)
 
