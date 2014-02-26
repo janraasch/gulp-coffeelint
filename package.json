@@ -27,22 +27,22 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
-    "coffeelint": ">1.0.2",
+    "coffeelint": ">=1.0.2",
     "coffeelint-stylish": "0.0.1",
-    "gulp-util": ">2.2.5",
-    "through2": ">0.4.0",
-    "args-js": ">0.10.1"
+    "gulp-util": ">=2.2.5",
+    "through2": ">=0.4.0",
+    "args-js": ">=0.10.1"
   },
   "devDependencies": {
-    "coffee-script": ">1.7.1",
-    "mocha": ">1.17.0",
-    "istanbul": ">0.2.3",
-    "should": ">3.1.0",
-    "sinon": ">1.8.1",
-    "coveralls": ">2.8.0",
-    "gulp": ">3.5.2",
-    "gulp-coffee": ">1.4.1",
-    "gulp-clean": ">0.2.2",
+    "coffee-script": ">=1.7.1",
+    "mocha": ">=1.17.0",
+    "istanbul": ">=0.2.3",
+    "should": ">=3.1.0",
+    "sinon": ">=1.8.1",
+    "coveralls": ">=2.8.0",
+    "gulp": ">=3.5.2",
+    "gulp-coffee": ">=1.4.1",
+    "gulp-clean": ">=0.2.2",
     "conventional-changelog": "0.0.6",
     "coffeelint-use-strict": "0.0.1"
   },
