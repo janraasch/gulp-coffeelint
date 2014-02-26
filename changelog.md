@@ -1,3 +1,12 @@
+<a name="0.3.1"></a>
+### 0.3.1 (2014-02-26)
+
+
+#### Bug Fixes
+
+* **dependencies:** fix #10 ([8340a4be](https://github.com/janraasch/gulp-coffeelint/commit/8340a4be7e73ab00dbc1daac5159d9da85736bbe))
+
+
 <a name="0.3.0"></a>
 ### 0.3.0 (2014-02-25)
 
