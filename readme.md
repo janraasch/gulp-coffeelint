@@ -58,7 +58,7 @@ file.coffeelint.success = true; // or false
 file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
 file.coffeelint.warningCount = 0; // number of warnings returned by `coffeelint`
 file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint.org/#api
-file.coffeelint.opt = {}; // the options use by `coffeelint`
+file.coffeelint.opt = {}; // the options used by `coffeelint`
 file.coffeelint.literate = false; // you guessed it
 ```
 
