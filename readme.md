@@ -72,7 +72,18 @@ Type: `String`
 Default: `'default'`
 Possible Values: `'default'`, `'fail'`
 
-The `'default'` reporter uses [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) to output a pretty report, while the `'fail'` reporter causes the stream to emit an `error`, if `file.coffeelint.success === false`.
+* The `'default'` reporter uses [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) to output a pretty report to the console. See [usage example](#usage) above.
+
+* If you would like your stream to `emit` an `error` (e.g. to fail the build on a CI server), when errors or warnings are found, use the `'fail'` reporter.
+
+This example will log the errors using the [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) reporter, then fail if `coffeelint` was not a success.
+
+```
+  .pipe(coffeelint())
+  .pipe(coffeelint.reporter())
+  .pipe(coffeelint.reporter('fail'))
+```
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [gulp][gulp] and [npm-test](https://npmjs.org/doc/test.html). Plus, make sure to adhere to these [commit message conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.uyo6cb12dt6w).
