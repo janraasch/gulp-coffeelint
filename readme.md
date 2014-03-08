@@ -76,7 +76,7 @@ Possible Values: `'default'`, `'fail'`
 
 * If you would like your stream to `emit` an `error` (e.g. to fail the build on a CI server), when errors or warnings are found, use the `'fail'` reporter.
 
-This example will log the errors using the [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) reporter, then fail if `coffeelint` was not a success.
+This example will log errors and warnings using the [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) reporter, then fail if `coffeelint` was not a success.
 
 ```
   .pipe(coffeelint())
