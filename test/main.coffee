@@ -321,6 +321,37 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
+        describe 'issue #12', ->
+            it 'args-js may modify the `params` parameter', (done) ->
+                dataCounter = 0
+
+                fakeFile = new gutil.File
+                    path: './test/fixture/file.js',
+                    cwd: './test/',
+                    base: './test/fixture/',
+                    contents: new Buffer 'console.log "gulp is awesome"'
+
+                opt = max_line_length: {value: 1024, level: 'ignore'}
+
+                stream_one = coffeelint opt: opt
+                stream_two = coffeelint opt: opt
+
+                stream_two.on 'data', (newFile) ->
+                    ++dataCounter
+                    should.exist newFile.coffeelint
+                    should.exist newFile.coffeelint.opt
+                    newFile.coffeelint.opt.should.eql opt
+
+                stream_two.once 'end', ->
+                    dataCounter.should.equal 1
+                    done()
+
+                stream_two.write fakeFile
+                stream_two.end()
+
+
+
+
         describe 'errors', ->
             describe 'are thrown', ->
                 it 'if custom rule is not of type function', (done) ->

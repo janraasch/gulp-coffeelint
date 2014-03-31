@@ -12,14 +12,15 @@ reporter = require './lib/reporter'
 # common utils
 {isLiterate, createPluginError, formatOutput} = require './lib/utils'
 
-params = [
-    {optFile: Args.STRING | Args.Optional}
-    {opt: Args.OBJECT | Args.Optional}
-    {literate: Args.BOOL | Args.Optional}
-    {rules: Args.ARRAY | Args.Optional, _default: []}
-]
-
 coffeelintPlugin = ->
+    # params for `args-js`
+    params = [
+        {optFile: Args.STRING | Args.Optional}
+        {opt: Args.OBJECT | Args.Optional}
+        {literate: Args.BOOL | Args.Optional}
+        {rules: Args.ARRAY | Args.Optional, _default: []}
+    ]
+
     # parse arguments
     try
         {opt, optFile, literate, rules} = Args params, arguments
