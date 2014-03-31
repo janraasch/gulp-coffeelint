@@ -1,3 +1,12 @@
+<a name="0.3.2"></a>
+### 0.3.2 (2014-03-31)
+
+
+#### Bug Fixes
+
+* **watch:** init params per call ([d560fd06](https://github.com/janraasch/gulp-coffeelint/commit/d560fd060707acfb296abd27658ddeb8864bf00d), closes [#12](https://github.com/janraasch/gulp-coffeelint/issues/12))
+
+
 <a name="0.3.1"></a>
 ### 0.3.1 (2014-02-26)
 
