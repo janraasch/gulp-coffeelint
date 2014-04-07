@@ -18,8 +18,8 @@
     "url": "http://janraasch.com"
   },
   "files": [
-    "index.js",
-    "lib/*.js"
+    "index.coffee",
+    "lib/*.coffee"
   ],
   "scripts": {
     "prepublish": "gulp coffee --require \"coffee-script/register\"",
@@ -27,7 +27,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
-    "coffeelint": "^1.0.2",
+    "coffeelint": "^1.1.0",
     "coffeelint-stylish": "0.0.1",
     "gulp-util": "^2.2.5",
     "through2": "^0.4.0",
