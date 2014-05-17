@@ -1,5 +1,5 @@
 # gulp-coffeelint [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url]
-[![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
+![Pretty Stylish](http://img.shields.io/badge/pretty-stylish-ff69b4.svg) [![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
 
 > [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp][gulp] 3.
 
@@ -96,16 +96,16 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 [coffeelint-options]: http://www.coffeelint.org/#options
 
 [npm-url]: https://npmjs.org/package/gulp-coffeelint
-[npm-image]: https://badge.fury.io/js/gulp-coffeelint.png
+[npm-image]: http://img.shields.io/npm/v/gulp-coffeelint.svg
 
 [travis-url]: http://travis-ci.org/janraasch/gulp-coffeelint
-[travis-image]: https://secure.travis-ci.org/janraasch/gulp-coffeelint.png?branch=master
+[travis-image]: https://travis-ci.org/janraasch/gulp-coffeelint.svg?branch=master
 
 [coveralls-url]: https://coveralls.io/r/janraasch/gulp-coffeelint
-[coveralls-image]: https://coveralls.io/repos/janraasch/gulp-coffeelint/badge.png
+[coveralls-image]: https://img.shields.io/coveralls/janraasch/gulp-coffeelint.svg
 
 [depstat-url]: https://david-dm.org/janraasch/gulp-coffeelint
-[depstat-image]: https://david-dm.org/janraasch/gulp-coffeelint.png
+[depstat-image]: https://david-dm.org/janraasch/gulp-coffeelint.svg
 
 [devdepstat-url]: https://david-dm.org/janraasch/gulp-coffeelint#info=devDependencies
-[devdepstat-image]: https://david-dm.org/janraasch/gulp-coffeelint/dev-status.png
+[devdepstat-image]: https://david-dm.org/janraasch/gulp-coffeelint/dev-status.svg
