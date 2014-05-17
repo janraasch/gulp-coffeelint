@@ -5,9 +5,9 @@ module.exports = class IRule
         name: 'awesome_custom_rule'
         level: 'error'
         message: 'Hold your horses there, pally!'
-        description: """
+        description: '''
             Sure gulp is good, but there are other ways too :)
-            """
+            '''
 
     lintLine: (line, lineApi) ->
         iruleRegex.test(line)
