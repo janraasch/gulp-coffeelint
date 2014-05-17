@@ -27,8 +27,8 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
-    "coffeelint": "^1.0.2",
-    "coffeelint-stylish": "0.0.1",
+    "coffeelint": "^1.4.0",
+    "coffeelint-stylish": "^0.1.0",
     "gulp-util": "^2.2.5",
     "through2": "^0.4.0",
     "args-js": "^0.10.1"
@@ -43,7 +43,7 @@
     "gulp": "^3.5.2",
     "gulp-coffee": "^1.4.1",
     "gulp-clean": "^0.2.2",
-    "conventional-changelog": "0.0.6",
+    "conventional-changelog": "0.0.9",
     "coffeelint-use-strict": "0.0.1"
   },
   "engines": {
