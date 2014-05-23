@@ -1,5 +1,5 @@
 # gulp-coffeelint [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url]
-![Pretty Stylish](http://img.shields.io/badge/pretty-stylish-ff69b4.svg) [![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url]
+[![Dependency Status][depstat-image]][depstat-url] [![devDependency Status][devdepstat-image]][devdepstat-url] ![Pretty Stylish](http://img.shields.io/badge/pretty-stylish-ff69b4.svg)
 
 > [CoffeeLint](http://www.coffeelint.org/) plugin for [gulp][gulp] 3.
 
