@@ -4,7 +4,7 @@ fs = require 'fs'
 {spawn} = require 'child_process'
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
-clean = require 'gulp-clean'
+del = require 'del'
 {log,colors} = require 'gulp-util'
 
 # compile `index.coffee` and `lib/*.coffee` files
@@ -14,9 +14,8 @@ gulp.task 'coffee', ->
         .pipe gulp.dest './'
 
 # remove `index.js`, `lib/*.js` and `coverage` dir
-gulp.task 'clean', ->
-    gulp.src ['index.js', 'lib/*.js', 'coverage'], read: false
-        .pipe clean()
+gulp.task 'clean', (cb) ->
+    del ['index.js', 'lib/*.js', 'coverage'], cb
 
 # run tests
 gulp.task 'test', ['coffee'], ->
