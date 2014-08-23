@@ -1,9 +1,17 @@
-<a name="0.3.3"></a>
+### 0.3.4 (2014-08-23)
+
+
+#### Maintenance
+
+* update dependencies
+
 ### 0.3.3  (2014-05-17)
 
-Update dependencies.
 
-<a name="0.3.2"></a>
+#### Maintenance
+
+* update dependencies
+
 ### 0.3.2 (2014-03-31)
 
 
@@ -12,7 +20,6 @@ Update dependencies.
 * **watch:** init params per call ([d560fd06](https://github.com/janraasch/gulp-coffeelint/commit/d560fd060707acfb296abd27658ddeb8864bf00d), closes [#12](https://github.com/janraasch/gulp-coffeelint/issues/12))
 
 
-<a name="0.3.1"></a>
 ### 0.3.1 (2014-02-26)
 
 
@@ -21,7 +28,6 @@ Update dependencies.
 * **dependencies:** fix #10 ([8340a4be](https://github.com/janraasch/gulp-coffeelint/commit/8340a4be7e73ab00dbc1daac5159d9da85736bbe))
 
 
-<a name="0.3.0"></a>
 ### 0.3.0 (2014-02-25)
 
 
@@ -30,18 +36,20 @@ Update dependencies.
 * **reporter:** add `'fail'` reporter ([34fb6afb](https://github.com/janraasch/gulp-coffeelint/commit/34fb6afbdb41679b0fe5983f1bf89760a0179193))
 
 
-<a name="0.2.2"></a>
 ### 0.2.2 (2014-02-17)
 
-Use `^` instead of `~` in `package.json`. See [node-semver](https://github.com/isaacs/node-semver).
 
-<a name="0.2.1"></a>
+#### Maintenance
+* use `^` instead of `~` in `package.json`, see [node-semver](https://github.com/isaacs/node-semver)
+
 ### 0.2.1 (2014-02-09)
 
-Update dependencies.
 
-<a name="0.2.0"></a>
-## 0.2.0 (2014-01-24)
+#### Maintenance
+
+* update dependencies
+
+### 0.2.0 (2014-01-24)
 
 
 #### Features
