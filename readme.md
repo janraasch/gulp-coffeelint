@@ -54,7 +54,7 @@ Add [custom rules](http://www.coffeelint.org/#api) to `coffeelint`.
 
 Adds the following properties to the `file` object:
 ```javascript
-file.coffeelint.success = true; // or false
+file.coffeelint.success = true; // if no errors were found, false otherwise
 file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
 file.coffeelint.warningCount = 0; // number of warnings returned by `coffeelint`
 file.coffeelint.results = []; // `coffeelint` results, see http://www.coffeelint.org/#api
@@ -70,11 +70,13 @@ Assuming you would like to make use of those pretty results we have after piping
 ### name
 Type: `String`
 Default: `'default'`
-Possible Values: `'default'`, `'fail'`
+Possible Values: `'default'`, `'fail'`, `'failOnWarning'`
 
 * The `'default'` reporter uses [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) to output a pretty report to the console. See [usage example](#usage) above.
 
-* If you would like your stream to `emit` an `error` (e.g. to fail the build on a CI server), when errors or warnings are found, use the `'fail'` reporter.
+* If you would like your stream to `emit` an `error` (e.g. to fail the build on a CI server) when errors are found, use the `'fail'` reporter.
+
+* If you want it to throw an error on both warnings and errors, use the `'failOnWarning'` reporter
 
 This example will log errors and warnings using the [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) reporter, then fail if `coffeelint` was not a success.
 

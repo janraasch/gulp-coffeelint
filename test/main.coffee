@@ -132,6 +132,34 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
+        it 'should send success status even when there are warnings', (done) ->
+            dataCounter = 0
+
+            fakeFile = new gutil.File
+                path: './test/fixture/file.js',
+                cwd: './test/',
+                base: './test/fixture/',
+                contents: new Buffer 'debugger'
+
+            stream = coffeelint 'no_debugger': 'level': 'warn'
+
+            stream.on 'data', (newFile) ->
+                ++dataCounter
+                should.exist newFile.coffeelint
+                should.exist newFile.coffeelint.success
+                should.exist newFile.coffeelint.warningCount
+                should.exist newFile.coffeelint.errorCount
+                newFile.coffeelint.success.should.be.true
+                newFile.coffeelint.warningCount.should.eql(1)
+                newFile.coffeelint.errorCount.should.eql(0)
+
+            stream.once 'end', ->
+                dataCounter.should.equal 1
+                done()
+
+            stream.write fakeFile
+            stream.end()
+
         it 'should send bad results', (done) ->
             dataCounter = 0
 
