@@ -19,7 +19,7 @@ exports.formatOutput = (results, opt, literate) ->
         warns++ if level is 'warn'
 
     # output
-    success: if results.length is 0 then true else false
+    success: errs is 0
     results: results
     errorCount: errs
     warningCount: warns
