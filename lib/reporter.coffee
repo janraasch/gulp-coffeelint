@@ -26,7 +26,8 @@ failReporter = ->
             return cb()
 
         # fail
-        @emit 'error', new Error "CoffeeLint failed for #{file.relative}"
+        @emit 'error',
+            createPluginError "CoffeeLint failed for #{file.relative}"
         cb()
 
 reporter = (type = 'default') ->
