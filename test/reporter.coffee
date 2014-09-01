@@ -180,7 +180,7 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-        it 'should not pass thourgh a bad file', (done) ->
+        it 'should not pass through a bad file', (done) ->
             dataCounter = 0
 
             fakeFile = new gutil.File
@@ -246,6 +246,7 @@ describe 'gulp-coffeelint', ->
             stream.on 'error', (e) ->
                 ++errorCounter
                 should.exist e
+                e.should.be.an.instanceof gutil.PluginError
                 e.should.have.property 'message'
                 e.message.should.equal 'CoffeeLint failed for file2.js'
 
@@ -284,7 +285,7 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-        it 'should not pass thourgh a bad file', (done) ->
+        it 'should not pass through a bad file', (done) ->
             dataCounter = 0
 
             fakeFile = new gutil.File
@@ -358,6 +359,7 @@ describe 'gulp-coffeelint', ->
             stream.on 'error', (e) ->
                 ++errorCounter
                 should.exist e
+                e.should.be.an.instanceof gutil.PluginError
                 e.should.have.property 'message'
                 e.message.should.equal 'CoffeeLint failed for file2.js'
 
@@ -365,4 +367,3 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile2
             stream.write fakeFile
             stream.end()
-
