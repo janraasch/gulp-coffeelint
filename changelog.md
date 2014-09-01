@@ -46,7 +46,7 @@ may use the `failOnWarning`-reporter.
 * **dependencies:** fix #10 ([8340a4be](https://github.com/janraasch/gulp-coffeelint/commit/8340a4be7e73ab00dbc1daac5159d9da85736bbe))
 
 
-### 0.3.0 (2014-02-25)
+## 0.3.0 (2014-02-25)
 
 
 #### Features
@@ -67,7 +67,7 @@ may use the `failOnWarning`-reporter.
 
 * update dependencies
 
-### 0.2.0 (2014-01-24)
+## 0.2.0 (2014-01-24)
 
 
 #### Features
