@@ -6,6 +6,9 @@
         "requireGlobal": true,
         "module": "coffeelint-use-strict"
     },
+    "prefer_english_operator": {
+        "level": "error"
+    },
     "line_endings": {
         "level": "error",
         "value": "unix"
