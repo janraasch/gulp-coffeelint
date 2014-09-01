@@ -1,3 +1,21 @@
+## 0.4.0 (2014-09-01)
+
+
+#### Features
+
+* **fail-reporter-api:** 'fail'-reporter no longer fails on mere warnings, but 'failOnWarning' does ([b30c0e4c](https://github.com/janraasch/gulp-coffeelint/commit/b30c0e4ce686634c1110616fb268a081e8dbb853))
+* **reporter:** nicer output for 'fail'-reporter ([02fe47a7](https://github.com/janraasch/gulp-coffeelint/commit/02fe47a7c20f891d43638cc44102bfccbebe47d8))
+
+
+#### Breaking Changes
+
+* Set `file.success` to `true` and fail `fail`-reporter only when `file.errorCount`
+is 0, even if `files.warningCount > 0`. To achieve the previous behavior of the `fail`-reporter you
+may use the `failOnWarning`-reporter.
+
+ ([b30c0e4c](https://github.com/janraasch/gulp-coffeelint/commit/b30c0e4ce686634c1110616fb268a081e8dbb853))
+
+
 ### 0.3.4 (2014-08-23)
 
 
