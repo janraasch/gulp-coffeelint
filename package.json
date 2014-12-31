@@ -9,6 +9,9 @@
     "coffeelint",
     "coffeescript",
     "coffee-script",
+    "cjsx",
+    "react",
+    "coffeelint-cjsx",
     "codeconventions"
   ],
   "repository": "janraasch/gulp-coffeelint",
