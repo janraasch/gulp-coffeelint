@@ -64,26 +64,81 @@ file.coffeelint.literate = false; // you guessed it
 
 ## Reporters
 
-### `coffeelint.reporter(name)`
-Assuming you would like to make use of those pretty results we have after piping through `coffeelint()` there are some bundled reporters at your service.
-
 ### name
-Type: `String`
+Type: `String`, `Function`, or a `coffeelint-reporter`  
 Default: `'default'`
-Possible Values: `'default'`, `'fail'`, `'failOnWarning'`
 
-* The `'default'` reporter uses [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) to output a pretty report to the console. See [usage example](#usage) above.
+### CoffeeLint reporters
 
-* If you would like your stream to `emit` an `error` (e.g. to fail the build on a CI server) when errors are found, use the `'fail'` reporter.
+#### Built-in
 
-* If you want it to throw an error on both warnings and errors, use the `'failOnWarning'` reporter
+You can choose any [CoffeeLint reporter](https://github.com/clutchski/coffeelint/tree/master/src/reporters)
+when you call
 
-This example will log errors and warnings using the [coffeelint-stylish](https://npmjs.org/package/coffeelint-stylish) reporter, then fail if `coffeelint` was not a success.
-
-```
+```js
+stuff
   .pipe(coffeelint())
-  .pipe(coffeelint.reporter())
+  .pipe(coffeelint.reporter('csv'))
+```
+
+#### External
+
+Let's use [coffeelint-stylish](https://github.com/janraasch/coffeelint-stylish) as an example
+
+```js
+var stylish = require('coffeelint-stylish');
+
+stuff
+  .pipe(coffeelint())
+  .pipe(coffeelint.reporter(stylish))
+```
+
+- OR -
+
+```js
+stuff
+  .pipe(coffeelint())
+  .pipe(coffeelint.reporter('coffelint-stylish'))
+```
+
+### Fail and FailOnWarning Reporters
+
+Do you want the task to fail when a CoffeeLint error or warning happens? gulp-coffeelint includes `fail` and `failOnWarning` reporters for this.
+
+This example will log the errors using the stylish reporter, then fail if CoffeeLint was not a success.
+
+```js
+stuff
+  .pipe(coffeelint())
+  .pipe(coffeelint.reporter('coffeelint-stylish'))
   .pipe(coffeelint.reporter('fail'))
+```
+
+### Custom Reporters
+
+Custom reporters don't interact with this module at all. CoffeeLint will add some attributes to the file object and you can add a custom reporter downstream.
+
+```js
+var jshint = require('gulp-coffeelint');
+var map = require('map-stream');
+
+var myReporter = map(function (file, cb) {
+  if (!file.coffeelint.success) {
+    console.log('CoffeeLint fail in '+file.path);
+    file.coffeelint.results.forEach(function (err) {
+      if (err) {
+        console.log(' '+file.path + ': line ' + err.line + ', col ' + err.character + ', code ' + err.code + ', ' + err.reason);
+      }
+    });
+  }
+  cb(null, file);
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./lib/*.js')
+    .pipe(coffeelint())
+    .pipe(myReporter);
+});
 ```
 
 

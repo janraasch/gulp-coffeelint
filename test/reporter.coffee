@@ -32,9 +32,31 @@ describe 'gulp-coffeelint', ->
         reporter_module.reporter.restore()
 
     describe 'coffeelint.reporter', ->
+        it 'loads plugin \'default\' reporter', (done) ->
+            reporter = coffeelint.reporter('default')
+            should.exist(reporter)
+            done()
+
+        it 'loads builtin \'raw\' reporter', (done) ->
+            reporter = coffeelint.reporter('raw')
+            should.exist(reporter)
+            done()
+
+        it 'loads module \'coffeelint-stylish\' reporter', (done) ->
+            reporter = coffeelint.reporter('coffeelint-stylish')
+            should.exist(reporter)
+            done()
+
+        it 'loads full-path \'coffeelint/csv\' reporter', (done) ->
+            path = '../node_modules/coffeelint/src/reporters/csv.coffee'
+            reporter = coffeelint.reporter(path)
+            should.exist(reporter)
+            done()
+
         it 'throws when passed invalid reporter type', (done) ->
             try
                 coffeelint.reporter 'stupid'
+                done('should throw before encountered')
             catch e
                 should(e.plugin).equal PLUGIN_NAME
                 should(e.message).equal "stupid #{ERR_MSG.REPORTER}"
