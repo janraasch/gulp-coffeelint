@@ -179,14 +179,19 @@ describe 'gulp-coffeelint', ->
                 newFile.coffeelint.success.should.be.false
                 newFile.coffeelint.errorCount.should.equal 1
                 newFile.coffeelint.warningCount.should.equal 0
-                newFile.coffeelint.results.should.be.an.instanceOf Array
-                newFile.coffeelint.results.should.not.be.empty
+                newFile.coffeelint.should.have.ownProperty 'results'
+                report = newFile.coffeelint.results
+                report.should.have.ownProperty 'paths'
+                report.paths.should.have.ownProperty 'file.js'
+                fileReport = report.paths['file.js']
+                fileReport.should.be.an.instanceOf Array
+                fileReport.should.not.be.empty
                 # see http://www.coffeelint.org/#api
-                newFile.coffeelint.results[0].level.should.equal 'error'
-                newFile.coffeelint.results[0].lineNumber.should.equal 1
-                should.exist newFile.coffeelint.results[0].message
-                should.exist newFile.coffeelint.results[0].description
-                should.exist newFile.coffeelint.results[0].rule
+                fileReport[0].level.should.equal 'error'
+                fileReport[0].lineNumber.should.equal 1
+                should.exist fileReport[0].message
+                should.exist fileReport[0].description
+                should.exist fileReport[0].rule
 
             stream.once 'end', ->
                 dataCounter.should.equal 1
@@ -214,17 +219,22 @@ describe 'gulp-coffeelint', ->
                 newFile.coffeelint.success.should.be.false
                 newFile.coffeelint.errorCount.should.equal 1
                 newFile.coffeelint.warningCount.should.equal 1
-                newFile.coffeelint.results.should.be.an.instanceOf Array
-                newFile.coffeelint.results.should.not.be.empty
+                newFile.coffeelint.should.have.ownProperty 'results'
+                report = newFile.coffeelint.results
+                report.should.have.ownProperty 'paths'
+                report.paths.should.have.ownProperty 'file.js'
+                fileReport = report.paths['file.js']
+                fileReport.should.be.an.instanceOf Array
+                fileReport.should.not.be.empty
                 # see http://www.coffeelint.org/#api
-                newFile.coffeelint.results[0].lineNumber.should.equal 1
-                should.exist newFile.coffeelint.results[0].message
-                should.exist newFile.coffeelint.results[0].description
-                should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal(
+                fileReport[0].lineNumber.should.equal 1
+                should.exist fileReport[0].message
+                should.exist fileReport[0].description
+                should.exist fileReport[0].rule
+                fileReport[0].rule.should.equal(
                     'max_line_length'
                 )
-                should.exist newFile.coffeelint.results[0].context
+                should.exist fileReport[0].context
 
             stream.once 'end', ->
                 dataCounter.should.equal 1
@@ -255,17 +265,22 @@ describe 'gulp-coffeelint', ->
                 newFile.coffeelint.success.should.be.false
                 newFile.coffeelint.errorCount.should.equal 1
                 newFile.coffeelint.warningCount.should.equal 1
-                newFile.coffeelint.results.should.be.an.instanceOf Array
-                newFile.coffeelint.results.should.not.be.empty
+                newFile.coffeelint.should.have.ownProperty 'results'
+                report = newFile.coffeelint.results
+                report.should.have.ownProperty 'paths'
+                report.paths.should.have.ownProperty 'file.js'
+                fileReport = report.paths['file.js']
+                fileReport.should.be.an.instanceOf Array
+                fileReport.should.not.be.empty
                 # see http://www.coffeelint.org/#api
-                newFile.coffeelint.results[0].lineNumber.should.equal 1
-                should.exist newFile.coffeelint.results[0].message
-                should.exist newFile.coffeelint.results[0].description
-                should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal(
+                fileReport[0].lineNumber.should.equal 1
+                should.exist fileReport[0].message
+                should.exist fileReport[0].description
+                should.exist fileReport[0].rule
+                fileReport[0].rule.should.equal(
                     'max_line_length'
                 )
-                should.exist newFile.coffeelint.results[0].context
+                should.exist fileReport[0].context
 
             stream.once 'end', ->
                 dataCounter.should.equal 1
@@ -293,17 +308,22 @@ describe 'gulp-coffeelint', ->
                 newFile.coffeelint.success.should.be.false
                 newFile.coffeelint.errorCount.should.equal 1
                 newFile.coffeelint.warningCount.should.equal 1
-                newFile.coffeelint.results.should.be.an.instanceOf Array
-                newFile.coffeelint.results.should.not.be.empty
+                newFile.coffeelint.should.have.ownProperty 'results'
+                report = newFile.coffeelint.results
+                report.should.have.ownProperty 'paths'
+                report.paths.should.have.ownProperty 'file.js'
+                fileReport = report.paths['file.js']
+                fileReport.should.be.an.instanceOf Array
+                fileReport.should.not.be.empty
                 # see http://www.coffeelint.org/#api
-                newFile.coffeelint.results[0].lineNumber.should.equal 1
-                should.exist newFile.coffeelint.results[0].message
-                should.exist newFile.coffeelint.results[0].description
-                should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal(
+                fileReport[0].lineNumber.should.equal 1
+                should.exist fileReport[0].message
+                should.exist fileReport[0].description
+                should.exist fileReport[0].rule
+                fileReport[0].rule.should.equal(
                     'max_line_length'
                 )
-                should.exist newFile.coffeelint.results[0].context
+                should.exist fileReport[0].context
 
             stream.once 'end', ->
                 dataCounter.should.equal 1
@@ -331,14 +351,19 @@ describe 'gulp-coffeelint', ->
                 newFile.coffeelint.success.should.be.false
                 newFile.coffeelint.errorCount.should.equal 1
                 newFile.coffeelint.warningCount.should.equal 0
-                newFile.coffeelint.results.should.be.an.instanceOf Array
-                newFile.coffeelint.results.should.not.be.empty
+                newFile.coffeelint.should.have.ownProperty 'results'
+                report = newFile.coffeelint.results
+                report.should.have.ownProperty 'paths'
+                report.paths.should.have.ownProperty 'file.js'
+                fileReport = report.paths['file.js']
+                fileReport.should.be.an.instanceOf Array
+                fileReport.should.not.be.empty
                 # see http://www.coffeelint.org/#api
-                newFile.coffeelint.results[0].lineNumber.should.equal 1
-                should.exist newFile.coffeelint.results[0].message
-                should.exist newFile.coffeelint.results[0].description
-                should.exist newFile.coffeelint.results[0].rule
-                newFile.coffeelint.results[0].rule.should.equal(
+                fileReport[0].lineNumber.should.equal 1
+                should.exist fileReport[0].message
+                should.exist fileReport[0].description
+                should.exist fileReport[0].rule
+                fileReport[0].rule.should.equal(
                     'awesome_custom_rule'
                 )
 

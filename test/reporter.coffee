@@ -4,13 +4,19 @@
 gutil = require 'gulp-util'
 should = require 'should'
 sinon = require 'sinon'
+proxyquire = require 'proxyquire'
+
+reporter = require 'coffeelint-stylish'
+spiedReporter = sinon.spy reporter
+proxyReportHandler = proxyquire '../lib/reporter',
+    'coffeelint-stylish': spiedReporter
 
 # SUT
-coffeelint = require '../'
+coffeelint = proxyquire '../',
+    './lib/reporter': proxyReportHandler
 
 # globals
-reporter_module = require 'coffeelint-stylish'
-stub = null
+publishStub = null
 
 # const
 PLUGIN_NAME = 'gulp-coffeelint'
@@ -25,11 +31,12 @@ describe 'gulp-coffeelint', ->
         countFileNames = []
         countResults = []
 
-        stub = sinon.stub reporter_module, 'reporter', ->
+        publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
             'I am a mocking bird'
 
     afterEach ->
-        reporter_module.reporter.restore()
+        spiedReporter.reset()
+        spiedReporter.prototype.publish.restore()
 
     describe 'coffeelint.reporter', ->
         it 'throws when passed invalid reporter type', (done) ->
@@ -92,7 +99,9 @@ describe 'gulp-coffeelint', ->
                 success: true,
                 warningCount: 2,
                 errorCount: 0,
-                results: [bugs: 'kinda']
+                results:
+                    paths:
+                        'file2.js': [bugs: 'kinda']
 
             stream = coffeelint.reporter()
 
@@ -101,8 +110,13 @@ describe 'gulp-coffeelint', ->
 
             stream.once 'end', ->
                 dataCounter.should.equal 2
-                stub.calledOnce.should.equal true
-                (should stub.firstCall.args).eql ['file2.js', [bugs: 'kinda']]
+                spiedReporter.callCount.should.equal 1
+                publishStub.callCount.should.equal 1
+                callArgs = spiedReporter.firstCall.args
+                (should callArgs).eql [
+                    paths:
+                        'file2.js': [bugs: 'kinda']
+                ]
                 done()
 
             stream.write fakeFile
@@ -122,7 +136,9 @@ describe 'gulp-coffeelint', ->
                 success: true,
                 warningCount: 0,
                 errorCount: 2,
-                results: [bugs: 'some']
+                results:
+                    paths:
+                        'file.js': [bugs: 'some']
 
             fakeFile2 = new gutil.File
                 path: './test/fixture/file2.js',
@@ -142,8 +158,13 @@ describe 'gulp-coffeelint', ->
 
             stream.once 'end', ->
                 dataCounter.should.equal 2
-                stub.calledOnce.should.equal true
-                (should stub.firstCall.args).eql ['file.js', [bugs: 'some']]
+                spiedReporter.callCount.should.equal 1
+                publishStub.callCount.should.equal 1
+                callArgs = spiedReporter.firstCall.args
+                (should callArgs).eql [
+                    paths:
+                        'file.js': [bugs: 'some']
+                ]
                 done()
 
             stream.write fakeFile

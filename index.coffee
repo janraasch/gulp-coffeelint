@@ -76,13 +76,15 @@ coffeelintPlugin = ->
         # get results `Array`
         # see http://www.coffeelint.org/#api
         # for format
-        results = coffeelint.lint(
+        errorReport = coffeelint.getErrorReport()
+        errorReport.lint(
+            file.relative,
             file.contents.toString(),
             fileOpt,
             fileLiterate
         )
 
-        output = formatOutput results, fileOpt, fileLiterate
+        output = formatOutput errorReport, fileOpt, fileLiterate
         file.coffeelint = output
 
         @push file

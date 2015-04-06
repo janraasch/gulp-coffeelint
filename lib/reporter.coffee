@@ -13,7 +13,8 @@ defaultReporter = ->
             return cb()
 
         # report
-        stylish.reporter file.relative, file.coffeelint.results
+        rpt = new stylish(file.coffeelint.results)
+        rpt.publish()
 
         # pass along
         @push file

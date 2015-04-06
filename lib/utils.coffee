@@ -8,19 +8,19 @@ exports.isLiterate = (file) ->
 exports.createPluginError = (message) ->
     new PluginError 'gulp-coffeelint', message
 
-exports.formatOutput = (results, opt, literate) ->
+exports.formatOutput = (errorReport, opt, literate) ->
     errs = 0
     warns = 0
 
     # some counting
-    results.map (result) ->
-        {level} = result
-        errs++ if level is 'error'
-        warns++ if level is 'warn'
+    for path, errors of errorReport.paths
+        for error in errors
+            errs++ if error.level is 'error'
+            warns++ if error.level is 'warn'
 
     # output
     success: errs is 0
-    results: results
+    results: errorReport
     errorCount: errs
     warningCount: warns
     opt: opt
