@@ -4,19 +4,7 @@
 gutil = require 'gulp-util'
 should = require 'should'
 sinon = require 'sinon'
-proxyquire = require 'proxyquire'
-
-reporter = require 'coffeelint-stylish'
-spiedReporter = sinon.spy reporter
-proxyReportHandler = proxyquire '../lib/reporter',
-    'coffeelint-stylish': spiedReporter
-
-# SUT
-coffeelint = proxyquire '../',
-    './lib/reporter': proxyReportHandler
-
-# globals
-publishStub = null
+proxyquire = require('proxyquire').noPreserveCache()
 
 # const
 PLUGIN_NAME = 'gulp-coffeelint'
@@ -25,20 +13,14 @@ ERR_MSG =
         'is not a valid reporter'
 
 describe 'gulp-coffeelint', ->
-    beforeEach ->
-        # reset statistics
-        countReporterCalls = 0
-        countFileNames = []
-        countResults = []
 
-        publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
-            'I am a mocking bird'
+    describe 'coffeelint.reporter function', ->
+        coffeelint = null
 
-    afterEach ->
-        spiedReporter.reset()
-        spiedReporter.prototype.publish.restore()
+        beforeEach ->
+            # SUT
+            coffeelint = require '../'
 
-    describe 'coffeelint.reporter', ->
         it 'throws when passed invalid reporter type', (done) ->
             try
                 coffeelint.reporter 'stupid'
@@ -47,7 +29,28 @@ describe 'gulp-coffeelint', ->
                 should(e.message).equal "stupid #{ERR_MSG.REPORTER}"
                 done()
 
-    describe 'coffeelint.reporter \'default\'', ->
+    describe 'running coffeelint.reporter()', ->
+        coffeelint = null
+        publishStub = null
+        spiedReporter = null
+
+        beforeEach ->
+            defaultReporter = require 'coffeelint-stylish'
+            spiedReporter = sinon.spy defaultReporter
+            proxyReportHandler = proxyquire '../lib/reporter',
+                'coffeelint-stylish': spiedReporter
+
+            # SUT
+            coffeelint = proxyquire '../',
+                './lib/reporter': proxyReportHandler
+
+            publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
+                'I am a mocking bird'
+
+        afterEach ->
+            spiedReporter.reset()
+            spiedReporter.prototype.publish.restore()
+
         it 'should pass through a file', (done) ->
             dataCounter = 0
 
@@ -171,7 +174,12 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile2
             stream.end()
 
-    describe 'coffeelint.reporter \'fail\'', ->
+    describe 'running coffeelint.reporter(\'fail\')', ->
+        coffeelint = null
+
+        beforeEach ->
+            # SUT
+            coffeelint = require '../'
 
         it 'should pass through an okay file', (done) ->
             dataCounter = 0
@@ -276,7 +284,12 @@ describe 'gulp-coffeelint', ->
             stream.write fakeFile
             stream.end()
 
-    describe 'coffeelint.reporter \'failOnWarning\'', ->
+    describe 'running coffeelint.reporter(\'failOnWarning\')', ->
+        coffeelint = null
+
+        beforeEach ->
+            # SUT
+            coffeelint = require '../'
 
         it 'should pass through an okay file', (done) ->
             dataCounter = 0
