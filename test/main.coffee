@@ -11,8 +11,8 @@ ERR_MSG =
     RULE:
         'Custom rules need to be of type function, not string'
     CONFIG:
-        "Could not load config from file:
- Error: ENOENT, no such file or directory ''"
+        'Could not load config from file:
+ Error: ENOENT, no such file or directory'
     STREAM:
         'Streaming not supported'
 
@@ -420,7 +420,7 @@ describe 'gulp-coffeelint', ->
                         stream = coffeelint ''
                     catch e
                         should(e.plugin).equal PLUGIN_NAME
-                        should(e.message).equal ERR_MSG.CONFIG
+                        should(e.message).containEql ERR_MSG.CONFIG
                         done()
 
             describe 'are emitted', ->
