@@ -57,7 +57,7 @@ Adds the following properties to the `file` object:
 file.coffeelint.success = true; // if no errors were found, false otherwise
 file.coffeelint.errorCount = 0; // number of errors returned by `coffeelint`
 file.coffeelint.warningCount = 0; // number of warnings returned by `coffeelint`
-file.coffeelint.results = {}; // `coffeelint` results, see http://www.coffeelint.org/#api
+file.coffeelint.results = ErrorReport Object; // instance of `Coffeelint::ErrorReport` , see https://github.com/clutchski/coffeelint/blob/master/src/error_report.coffee
 file.coffeelint.opt = {}; // the options used by `coffeelint`
 file.coffeelint.literate = false; // you guessed it
 ```
@@ -65,7 +65,7 @@ file.coffeelint.literate = false; // you guessed it
 ## Reporters
 
 ### name
-Type: `String`, `Function`, or a `coffeelint-reporter`  
+Type: `String`, `Function`
 Default: `'coffeelint-stylish'`
 
 ### CoffeeLint reporters
@@ -74,9 +74,6 @@ Default: `'coffeelint-stylish'`
 
 You can choose any [CoffeeLint reporter](https://github.com/clutchski/coffeelint/tree/master/src/reporters)
 when you call
-
-> `coffee-script` is not a required dependency. Using a built-in
-> reporter will load its JavaScript version.
 
 ```js
 stuff
@@ -92,22 +89,20 @@ the reporter's constructor function or as its module name.
 ```js
 var stylish = require('coffeelint-stylish');
 
-stuff
+gulp.src('./src/*.coffee')
   .pipe(coffeelint())
   .pipe(coffeelint.reporter(stylish))
 ```
 
-- OR -
+-- OR --
 
 ```js
-stuff
+gulp.src('./src/*.coffee')
   .pipe(coffeelint())
   .pipe(coffeelint.reporter('coffelint-stylish'))
 ```
 
-Any module following the CoffeeLint Reporter module format should work.
-These modules have a constructor accepting a CoffeeLint ErrorReport
-object, and a `publish` function.
+Any module following the CoffeeLint Reporter module format should work. These modules have a constructor accepting a `CoffeeLint::ErrorReport Object`, and provide a `publish` function.
 
 ### Fail and FailOnWarning Reporters
 
@@ -116,7 +111,7 @@ Do you want the task to fail when a CoffeeLint error or warning happens? gulp-co
 This example will log the errors using the stylish reporter, then fail if CoffeeLint was not a success.
 
 ```js
-stuff
+gulp.src('./src/*.coffee')
   .pipe(coffeelint())
   .pipe(coffeelint.reporter('coffeelint-stylish'))
   .pipe(coffeelint.reporter('fail'))
@@ -135,14 +130,15 @@ var myReporter = (function() {
   }
 
   MyReporter.prototype.publish = function() {
-    var paths = this.errorReport.paths;
-    for (filename in paths) {
-      console.log(paths[filename].message);
+    var hasError = this.errorReport.hasError();
+    if (hasError) {
+      return console.log('Oh no!');
     }
-  };
+    return console.log('Oh yeah!');
+  }
 
   return MyReporter;
-})()
+})();
 
 gulp.task('lint', function() {
   return gulp.src('./src/*.coffee')
