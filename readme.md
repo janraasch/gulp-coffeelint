@@ -76,7 +76,7 @@ You can choose any [CoffeeLint reporter](https://github.com/clutchski/coffeelint
 when you call
 
 ```js
-stuff
+gulp.src('./src/*.coffee')
   .pipe(coffeelint())
   .pipe(coffeelint.reporter('csv'))
 ```
