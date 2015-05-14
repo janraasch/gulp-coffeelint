@@ -11,8 +11,7 @@ ERR_MSG =
     RULE:
         'Custom rules need to be of type function, not string'
     CONFIG:
-        'Could not load config from file:
- Error: ENOENT, no such file or directory'
+        'Could not load config from file: Error: ENOENT'
     STREAM:
         'Streaming not supported'
 
