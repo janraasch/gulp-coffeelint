@@ -43,6 +43,7 @@
     "gulp-coffee": "^2.1.2",
     "istanbul": "^0.3.0",
     "mocha": "^2.1.0",
+    "proxyquire": "^1.4.0",
     "should": "^5.0.0",
     "sinon": "^1.8.1"
   },

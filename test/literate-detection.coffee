@@ -63,7 +63,7 @@ describe 'gulp-coffeelint', ->
 
             for extension in ['.coffee', '.js', '.custom', '.md', '.', '']
                 ((extension) ->
-                    it "on #{(extension || 'no extension')}", (done) ->
+                    it "on #{(extension or 'no extension')}", (done) ->
                         dataCounter = 0
 
                         fakeFile = new gutil.File
