@@ -61,10 +61,10 @@ loadReporter = (reporter) ->
     if typeof reporter is 'string'
         # Try to load CoffeeLint's build-in reporters
         try
-            return require('coffeelint/lib/reporters/' + reporter)
+            return require "coffeelint/lib/reporters/#{reporter}"
 
         # Try to load full-path and module reporters
         try
-            return require(reporter)
+            return require reporter
 
 module.exports = reporter
