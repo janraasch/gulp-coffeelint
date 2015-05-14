@@ -9,19 +9,12 @@ exports.createPluginError = (message) ->
     new PluginError 'gulp-coffeelint', message
 
 exports.formatOutput = (errorReport, opt, literate) ->
-    errs = 0
-    warns = 0
-
-    # some counting
-    for path, errors of errorReport.paths
-        for error in errors
-            errs++ if error.level is 'error'
-            warns++ if error.level is 'warn'
+    {errorCount, warningCount} = errorReport.getSummary()
 
     # output
-    success: errs is 0
+    success: errorCount is 0
     results: errorReport
-    errorCount: errs
-    warningCount: warns
+    errorCount: errorCount
+    warningCount: warningCount
     opt: opt
     literate: literate
