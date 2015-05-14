@@ -1,3 +1,19 @@
+<a name"0.5.0"></a>
+## 0.5.0 (2015-05-14)
+
+
+#### Features
+
+* **custom-reporters:** allow external and custom Reporters ([c14be0f9](https://github.com/janraasch/gulp-coffeelint/commit/c14be0f9))
+* **reporter-publish:** use Reporter.publish instead of .reporter ([4b3231f9](https://github.com/janraasch/gulp-coffeelint/commit/4b3231f9))
+
+
+#### Breaking Changes
+
+* **results:** the `results`-key now holds an instance of `Coffeelint::ErrorReport` (see https://github.com/clutchski/coffeelint/blob/master/src/error_report.coffee) instead of an `Array`. You may call `results.getErrors(filename)` to get the old `Array` back
+* **reporter:** running `coffeelint.reporter('default')` now uses the *default* CoffeeLint reporter instead of the `coffeelint-stylish` reporter. You may run `coffeelint.reporter()` or `coffeelint.reporter('coffeelint-stylish')` to use the *stylish* reporter
+
+
 ## 0.4.0 (2014-09-01)
 
 
