@@ -6,6 +6,15 @@
         "requireGlobal": true,
         "module": "coffeelint-use-strict"
     },
+    "braces_spacing": {
+        "level": "error"
+    },
+    "ensure_comprehensions": {
+      "level": "error"
+    },
+    "no_empty_functions": {
+      "level": "error"
+    },
     "prefer_english_operator": {
         "level": "error"
     },

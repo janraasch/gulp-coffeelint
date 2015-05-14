@@ -668,6 +668,7 @@ describe 'gulp-coffeelint', ->
 
             stream.on 'error', ->
                 # prevent stream from throwing
+                undefined
 
             stream.once 'end', ->
                 dataCounter.should.equal 0
@@ -781,6 +782,7 @@ describe 'gulp-coffeelint', ->
 
             stream.on 'error', ->
                 # prevent stream from throwing
+                undefined
 
             stream.once 'end', ->
                 dataCounter.should.equal 0
