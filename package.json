@@ -24,7 +24,8 @@
   "scripts": {
     "prepublish": "gulp coffee --require \"coffee-script/register\"",
     "test": "coffeelint gulpfile.coffee index.coffee lib test -f ./coffeelint.json && istanbul test _mocha --report lcovonly -- ./test/*.coffee --require coffee-script/register --reporter spec",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "changelog": "conventional-changelog -p angular -i changelog.md -w"
   },
   "dependencies": {
     "args-js": "^0.10.5",
