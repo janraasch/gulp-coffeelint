@@ -36,7 +36,7 @@
   "devDependencies": {
     "coffee-script": "^1.7.1",
     "coffeelint-use-strict": "0.0.1",
-    "conventional-changelog": "0.0.17",
+    "conventional-changelog": "^0.4.2",
     "coveralls": "^2.8.0",
     "del": "^1.1.1",
     "gulp": "^3.5.2",
@@ -44,7 +44,7 @@
     "istanbul": "^0.3.0",
     "mocha": "^2.1.0",
     "proxyquire": "^1.4.0",
-    "should": "^6.0.1",
+    "should": "^7.1.0",
     "sinon": "^1.8.1"
   },
   "engines": {
