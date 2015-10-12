@@ -99,7 +99,7 @@ gulp.src('./src/*.coffee')
 ```js
 gulp.src('./src/*.coffee')
   .pipe(coffeelint())
-  .pipe(coffeelint.reporter('coffelint-stylish'))
+  .pipe(coffeelint.reporter('coffeelint-stylish'))
 ```
 
 Any module following the CoffeeLint Reporter module format should work. These modules have a constructor accepting a `CoffeeLint::ErrorReport Object`, and provide a `publish` function.
