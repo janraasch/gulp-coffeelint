@@ -1,3 +1,12 @@
+<a name="0.6.0"></a>
+## [0.6.0](https://github.com/janraasch/gulp-coffeelint/compare/v0.5.0...v0.6.0) (2015-12-14)
+
+#### Maintenance
+
+* **dependency(through2):** update to v2
+([0edbc75d](https://github.com/janraasch/gulp-coffeelint/commit/0edbc75d))
+
+
 ## 0.5.0 (2015-05-14)
 
 
