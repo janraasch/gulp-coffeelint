@@ -46,7 +46,7 @@
     "mocha": "^3.0.1",
     "proxyquire": "^1.4.0",
     "should": "^11.0.0",
-    "sinon": "^1.8.1"
+    "sinon": "^2.0.0"
   },
   "engines": {
     "npm": ">=1.3.7",

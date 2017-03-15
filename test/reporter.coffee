@@ -44,8 +44,8 @@ describe 'gulp-coffeelint', ->
             coffeelint = proxyquire '../',
                 './lib/reporter': proxyReportHandler
 
-            publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
-                'I am a mocking bird'
+            publishStub = sinon.stub spiedReporter.prototype, 'publish'
+                .callsFake -> 'I am a mocking bird'
 
         afterEach ->
             spiedReporter.reset()
@@ -189,8 +189,8 @@ describe 'gulp-coffeelint', ->
             coffeelint = proxyquire '../',
                 './lib/reporter': proxyReportHandler
 
-            publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
-                'I am a mocking bird'
+            publishStub = sinon.stub spiedReporter.prototype, 'publish'
+                .callsFake -> 'I am a mocking bird'
 
         afterEach ->
             spiedReporter.reset()
@@ -334,8 +334,8 @@ describe 'gulp-coffeelint', ->
             coffeelint = proxyquire '../',
                 './lib/reporter': proxyReportHandler
 
-            publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
-                'I am a mocking bird'
+            publishStub = sinon.stub spiedReporter.prototype, 'publish'
+                .callsFake -> 'I am a mocking bird'
 
         afterEach ->
             spiedReporter.reset()
@@ -479,8 +479,8 @@ describe 'gulp-coffeelint', ->
             coffeelint = proxyquire '../',
                 './lib/reporter': proxyReportHandler
 
-            publishStub = sinon.stub spiedReporter.prototype, 'publish', ->
-                'I am a mocking bird'
+            publishStub = sinon.stub spiedReporter.prototype, 'publish'
+                .callsFake -> 'I am a mocking bird'
 
         afterEach ->
             spiedReporter.reset()
