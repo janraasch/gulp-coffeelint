@@ -18,7 +18,7 @@ var gulp = require('gulp');
 var coffeelint = require('gulp-coffeelint');
 
 gulp.task('lint', function () {
-    gulp.src('./src/*.coffee')
+    return gulp.src('./src/*.coffee')
         .pipe(coffeelint())
         .pipe(coffeelint.reporter())
 });
