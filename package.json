@@ -9,6 +9,9 @@
     "coffeelint",
     "coffeescript",
     "coffee-script",
+    "cjsx",
+    "react",
+    "coffeelint-cjsx",
     "codeconventions"
   ],
   "repository": "janraasch/gulp-coffeelint",
@@ -18,8 +21,8 @@
     "url": "http://janraasch.com"
   },
   "files": [
-    "index.js",
-    "lib/*.js"
+    "index.coffee",
+    "lib/*.coffee"
   ],
   "scripts": {
     "prepublish": "gulp coffee --require \"coffee-script/register\"",

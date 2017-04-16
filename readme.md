@@ -26,7 +26,7 @@ gulp.task('lint', function () {
 
 ## API
 
-### `coffeelint([optFile,] [opt,] [literate,] [rules])`
+### `coffeelint([optFile,] [opt,] [literate,] [rules,] [cjsx])`
 All arguments are optional. By default `gulp-coffeelint` will walk up the directory tree looking for a `coffeelint.json` (per file, i.e. dirname) or a `package.json` that has a `coffeelintConfig` object ([as the cli does](http://www.coffeelint.org/#usage)). Also, `.litcoffee` and `.coffee.md` files will be treated as Literate CoffeeScript.
 
 ### optFile
@@ -49,6 +49,11 @@ Type: `Array[Function]`
 Default: `[]`
 
 Add [custom rules](http://www.coffeelint.org/#api) to `coffeelint`.
+
+### cjsx
+Type: `Boolean`
+
+Should we use [`coffeelint-cjsx`](https://www.npmjs.com/package/coffeelint-cjsx) instead of `coffeelint`?
 
 ## Results
 

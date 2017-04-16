@@ -3,8 +3,6 @@
 fs = require 'fs'
 through2 = require 'through2'
 Args = require 'args-js' # main entry missing in `args-js` package
-coffeelint = require 'coffeelint'
-configfinder = require 'coffeelint/lib/configfinder'
 
 # `reporter`
 reporter = require './lib/reporter'
@@ -19,11 +17,12 @@ coffeelintPlugin = ->
         {opt: Args.OBJECT | Args.Optional}
         {literate: Args.BOOL | Args.Optional}
         {rules: Args.ARRAY | Args.Optional, _default: []}
+        {cjsx: Args.BOOL | Args.Optional}
     ]
 
     # parse arguments
     try
-        {opt, optFile, literate, rules} = Args params, arguments
+        {opt, optFile, literate, rules, cjsx} = Args params, arguments
     catch e
         throw createPluginError e
 
@@ -32,6 +31,11 @@ coffeelintPlugin = ->
     if Array.isArray opt
         rules = opt
         opt = undefined
+
+    # bring in the linter
+    coffeelintPkg = if cjsx then 'coffeelint-cjsx' else 'coffeelint'
+    coffeelint = require coffeelintPkg
+    configfinder = require coffeelintPkg + '/lib/configfinder'
 
     # register custom rules
     rules.map (rule) ->
