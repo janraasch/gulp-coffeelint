@@ -35,7 +35,7 @@
     "through2": "^2.0.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.7.1",
+    "coffee-script": "^1.11.1",
     "coffeelint-use-strict": "^1.0.0",
     "conventional-changelog": "^1.0.0",
     "coveralls": "^2.8.0",
